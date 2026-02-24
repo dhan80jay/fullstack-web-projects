@@ -1,0 +1,118 @@
+@charset "UTF-8";
+/* Reset + base */
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f6f9fc, #eef2f7);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card container */
+form {
+    background: #ffffff;
+    width: 420px;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Inputs & textarea */
+form input,
+form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #dcdfe6;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Focus effect */
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
+}
+
+/* File input */
+form input[type="file"] {
+    padding: 8px;
+    background: #fafafa;
+}
+
+/* Textarea */
+form textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Button */
+form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4a90e2, #357abd);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Button hover */
+form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(53, 122, 189, 0.3);
+}
+
+/* Button active */
+form button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(53, 122, 189, 0.25);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.back-link:hover {
+    background: #f5f7fa;
+    border-color: #4a90e2;
+    color: #4a90e2;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+}

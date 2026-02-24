@@ -1,0 +1,176 @@
+@charset "UTF-8";
+/* ===============================
+   ADMIN COMMON CSS
+   Used for all admin pages
+   EXCEPT dashboard.jsp
+   =============================== */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f4f6f8;
+	margin: 0;
+	padding: 20px;
+}
+
+/* Page Title */
+h2 {
+	color: #2c3e50;
+	margin-bottom: 15px;
+}
+
+/* ===============================
+   TABLE STYLES
+   =============================== */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #ffffff;
+	margin-top: 15px;
+}
+
+th {
+	background-color: #34495e;
+	color: #ffffff;
+	padding: 12px;
+	font-size: 14px;
+}
+
+td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	font-size: 14px;
+	text-align: center;
+}
+
+tr:hover {
+	background-color: #f1f1f1;
+}
+
+/* ===============================
+   BUTTONS & LINKS
+   =============================== */
+.btn {
+	display: inline-block;
+	padding: 8px 14px;
+	border-radius: 4px;
+	text-decoration: none;
+	font-size: 13px;
+	margin: 2px;
+	cursor: pointer;
+	color: #ffffff;
+}
+
+.btn-add {
+	background-color: #007bff;
+}
+
+.btn-edit {
+	background-color: #28a745;
+}
+
+.btn-delete {
+	background-color: #dc3545;
+}
+
+.btn:hover {
+	opacity: 0.9;
+}
+
+/* ===============================
+   FORMS (Add / Edit Product)
+   =============================== */
+form {
+	max-width: 520px;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea,
+select {
+	width: 100%;
+	padding: 9px;
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+button {
+	margin-top: 15px;
+	background-color: #28a745;
+	color: #ffffff;
+	border: none;
+	padding: 10px 18px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+button:hover {
+	background-color: #218838;
+}
+
+/* ===============================
+   STATUS COLORS (Orders)
+   =============================== */
+.status-PLACED {
+	color: #f39c12;
+	font-weight: bold;
+}
+
+.status-SHIPPED {
+	color: #3498db;
+	font-weight: bold;
+}
+
+.status-DELIVERED {
+	color: #2ecc71;
+	font-weight: bold;
+}
+
+.status-CANCELLED {
+	color: #e74c3c;
+	font-weight: bold;
+}
+/* 💳 Payment Status Badge */
+.payment {
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+/* ✅ Paid */
+.payment.paid {
+    background-color: #e6f7ee;
+    color: #1e824c;
+    border: 1px solid #1e824c;
+}
+
+/* ⏳ Pending */
+.payment.pending {
+    background-color: #fff4e5;
+    color: #e67e22;
+    border: 1px solid #e67e22;
+}
+
+/* ❌ Failed */
+.payment.failed {
+    background-color: #fdecea;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+}

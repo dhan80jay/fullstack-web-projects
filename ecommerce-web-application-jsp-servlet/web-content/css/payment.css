@@ -1,0 +1,311 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* ===== PAGE BACKGROUND ===== */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.payment-box {
+    width: 500px;
+    height:46rem;
+    background: #ffffff;
+    padding: 25px 28px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== HEADINGS ===== */
+.payment-box h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 18px;
+}
+
+.payment-box h3 {
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 17px;
+}
+
+/* ===== INPUT FIELDS ===== */
+.payment-box input {
+    width: 100%;
+    padding: 11px 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.payment-box input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* ===== BUTTON COMMON ===== */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+/* ===== CARD PAYMENT BUTTON ===== */
+.btn.pay {
+    background: linear-gradient(135deg, #007bff, #0056d2);
+    color: #fff;
+}
+
+.btn.pay:hover {
+    background: linear-gradient(135deg, #0056d2, #003f9e);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+/* ===== COD BUTTON ===== */
+.btn.cod {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: #fff;
+    margin-top:30px;
+}
+
+.btn.cod:hover {
+    background: linear-gradient(135deg, #1e7e34, #155724);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+    transform: translateY(-1px);
+}
+
+/* ===== SEPARATOR ===== */
+.payment-box hr {
+    border: none;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 18px 0;
+}
+
+/* ===== COD TEXT ===== */
+.cod-text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* ===== ERROR MESSAGE ===== */
+.error-msg {
+    background: #ffe5e5;
+    color: #c62828;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #f5c2c2;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .payment-box {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* ===== ADDRESS SECTION ===== */
+.address-section {
+    margin-bottom: 20px;
+}
+
+.address-section h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+/* TEXTAREA */
+.address-section textarea {
+    width: 100%;
+    height: 70px;
+    resize: none;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.address-section textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* ROW FOR CITY / STATE */
+.address-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.address-row input {
+    flex: 1;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Full screen */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Page background */
+body {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+}
+
+/* CENTER FIX */
+.success-wrapper {
+    min-height: 100vh;           /* 👈 IMPORTANT */
+    display: flex;               /* 👈 IMPORTANT */
+    justify-content: center;     /* horizontal center */
+    align-items: center;         /* vertical center */
+    padding: 20px;
+}
+
+/* Success card */
+.success-box {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 0.6s ease;
+}
+
+/* Icon */
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: #4caf50;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Title */
+.success-box h2 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+/* Message */
+.success-box p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.success-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Button base */
+.btn {
+     border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Primary */
+.btn.primary {
+    background: #4caf50;
+    color: white;
+}
+.btn.primary:hover {
+    background: #43a047;
+    transform: translateY(-2px);
+}
+
+/* Secondary */
+.btn.secondary {
+    background: #eeeeee;
+    color: #333;
+}
+.btn.secondary:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .success-actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

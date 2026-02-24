@@ -1,0 +1,105 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Page background */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f4f6f9, #e9eff7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main container */
+.address-box {
+    background: #ffffff;
+    width: 460px;
+    height:550px;
+    padding: 32px 36px;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Heading */
+.address-box h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+/* COD subtitle */
+.cod-text {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 22px;
+    color: #555;
+}
+
+/* Address section (from address.jsp) */
+.address-section {
+    margin-top: 10px;
+}
+
+/* Inputs */
+.address-box input,
+.address-box textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Textarea */
+.address-box textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Two-column row */
+.address-row {
+    display: flex;
+    gap: 12px;
+}
+
+.address-row input {
+    flex: 1;
+}
+
+/* Submit button */
+.btn-cod {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+.btn-cod:hover {
+    background: linear-gradient(135deg, #1e8449, #145a32);
+    transform: translateY(-2px);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .address-box {
+        width: 92%;
+        padding: 26px;
+    }
+
+    .address-box h3 {
+        font-size: 22px;
+    }
+}
