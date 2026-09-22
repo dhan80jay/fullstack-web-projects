@@ -1,0 +1,196 @@
+<div class="prescriptions-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Prescriptions</h1>
+      <p>Manage patient prescriptions and diagnoses</p>
+    </div>
+
+    <button class="add-btn" routerLink="/dashboard/admin/create-prescription">
+      <i class="bi bi-prescription2"></i>
+      Create Prescription
+    </button>
+
+  </div>
+
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        <i class="bi bi-prescription2"></i>
+      </div>
+
+      <div>
+        <span>Total Prescriptions</span>
+        <h2>{{prescriptions.length}}</h2>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon today-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+        <span>Today's Prescriptions</span>
+        <h2>{{registeredToday}}</h2>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="data-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Prescription List</h2>
+        <p>All patient prescriptions</p>
+      </div>
+
+
+      <div class="table-actions">
+
+        <div class="search-box">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Search prescription..."
+            [(ngModel)]="searchText"
+            (input)="searchPatientByName()"
+          >
+
+        </div>
+
+        <!-- Filter -->
+<button class="filter-btn" type="button" (click)="filterPatientsByNames()">
+  <i class="bi bi-sort-alpha-down"></i>
+  <span>A → Z</span>
+</button>
+
+<button class="filter-btn" type="button" (click)="filterPatientsByNames()">
+  <i class="bi bi-sort-alpha-up"></i>
+  <span>Z → A</span>
+</button>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Prescription</th>
+            <th>Diagnosis</th>
+            <th>Prescription Date</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+@for (prescription of sortedPrescription | paginate:{itemsPerPage:'5',currentPage:'1'}; track prescription.id) {
+          <tr>
+
+            <td>
+
+              <div class="prescription-info">
+
+                <div class="prescription-icon">
+                  <i class="bi bi-prescription2"></i>
+                </div>
+
+                <div>
+
+                  <strong>Prescription #PR-{{prescription.id}}</strong>
+
+                  <span>Patient: {{prescription.appointment.patient.firstName }} {{prescription.appointment.patient.lastName}}</span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <td>
+              {{prescription.diagnosis}}
+            </td>
+
+
+            <td>
+              {{prescription.prescriptionDate | date:'dd/MMM/yyyy'}}
+            </td>
+
+
+            <td>
+              {{prescription.notes}}
+            </td>
+
+
+            <td>
+
+              <div class="action-buttons">
+
+                <button class="action-btn view-btn" 
+                [routerLink]="['/dashboard/admin/view-prescription',prescription.id]">
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+
+                <button class="action-btn edit-btn"
+                [routerLink]="['/dashboard/admin/update-prescription',prescription.id]">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+
+                <button class="action-btn delete-btn"
+                 (click)="deletePrescription(prescription.id)">
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        }
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+
+    <div class="pagination">
+      <span> Showing {{ prescriptions.length }} patients </span>
+
+      <pagination-controls (pageChange)="p = $event"> </pagination-controls>
+    </div>
+
+    </div>
+
+
+
+</div>

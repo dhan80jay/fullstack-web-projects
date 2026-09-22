@@ -1,0 +1,271 @@
+<div class="add-patient-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>Add New Patient</h1>
+      <p>Enter the patient's information below</p>
+    </div>
+
+    <a routerLink="/dashboard/admin/patient" class="back-btn">
+      <i class="bi bi-arrow-left"></i>
+      Back to Patients
+    </a>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <div class="form-header">
+      <div class="form-header-icon">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+
+      <div>
+        <h2>Patient Information</h2>
+        <p>Please provide the patient's basic information</p>
+      </div>
+    </div>
+
+    <div class="form-body">
+      <!-- =========================
+           PERSONAL INFORMATION
+      ========================== -->
+
+      <div class="section-title">
+        <i class="bi bi-person-vcard-fill"></i>
+
+        <span>Personal Information</span>
+      </div>
+
+      <form #patientForm="ngForm" (ngSubmit)="addPatient()">
+      <div class="form-grid">
+        <!-- First Name -->
+        <div class="form-group">
+          <label for="firstName">
+            First Name
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-person"></i>
+
+            <input type="text" id="firstName" name="fname" #fnameRef="ngModel" placeholder="Enter first name" [(ngModel)]="patient.firstName" required
+            />
+
+          </div>
+
+            @if (fnameRef.invalid && fnameRef.touched) {
+              <div class="alert alert-danger">First Name is required</div>
+            }
+
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+          <label for="lastName">
+            Last Name
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-person"></i>
+
+            <input type="text" id="lastName" name="lname" #lnameRef="ngModel" placeholder="Enter last name" [(ngModel)]="patient.lastName" required />
+          </div>
+            @if (lnameRef.invalid && lnameRef.touched) {
+              <div class="alert alert-danger">Last Name is required</div>
+            }
+
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+          <label for="dateOfBirth">
+            Date of Birth
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-calendar3"></i>
+
+            <input type="date" name="dob" #dobRef="ngModel" id="dateOfBirth" [(ngModel)]="patient.dateOfBirth" required/>
+          </div>
+
+            @if (dobRef.invalid && dobRef.touched) {
+              <div class="alert alert-danger">DOB is required</div>
+            }
+
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <label for="gender">
+            Gender
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-gender-ambiguous"></i>
+
+            <select id="gender" name="gender" #genRef="ngModel" required [(ngModel)]="patient.gender">
+              <option value="">Select gender</option>
+
+              <option value="Male">Male</option>
+
+              <option value="Female">Female</option>
+
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+            @if (genRef.invalid && genRef.touched) {
+              <div class="alert alert-danger">Gender is required</div>
+            }
+
+        </div>
+
+        <!-- Blood Group -->
+        <div class="form-group">
+          <label for="bloodGroup">
+            Blood Group
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-droplet-fill"></i>
+
+            <select id="bloodGroup" name="blood" #bloodRef="ngModel" [(ngModel)]="patient.bloodGroup" required>
+              <option value="">Select blood group</option>
+
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+
+            @if (bloodRef.invalid && bloodRef.touched) {
+              <div class="alert alert-danger">Blood is required</div>
+            }
+
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phoneNumber">
+            Phone Number
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-telephone-fill"></i>
+
+            <input type="tel" inputmode="numeric" id="phoneNumber" name="phone" #phoneRef="ngModel"  
+            placeholder="Enter phone number" [(ngModel)]="patient.phoneNumber"
+            pattern="[0-9]{10}"
+              required />
+          </div>
+            @if (phoneRef.invalid && phoneRef.touched) {
+            @if (phoneRef.hasError('pattern')) {
+              <div class="alert alert-danger">Invalid phone number</div>
+            }
+            @else {
+              <div class="alert alert-danger">Phone number is required</div>
+            }
+            }
+
+        </div>
+
+        <!-- User Name-->
+        <div class="form-group">
+          <label for="username"> Username 
+           <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-person-fill"></i>
+
+            <input type="text" id="username" name="user" #userRef="ngModel" placeholder="Enter username" [(ngModel)]="patient.user.username" required/>
+          </div>
+
+           @if (userRef.invalid && userRef.touched) {
+              <div class="alert alert-danger">User name is required</div>
+            }
+
+
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password"> 
+            Password 
+         <span>*</span>
+</label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-lock-fill"></i>
+
+            <input type="password" id="password" minlength="6" maxlength="16" name="pass" #passRef="ngModel" placeholder="Enter password" 
+            [(ngModel)]="patient.user.password" required/>
+          </div>
+
+             @if (passRef.invalid && passRef.touched) {
+              @if (passRef.hasError('minlength')) {
+                <div class="alert alert-danger">Minimum 6 characters</div>
+              }
+              @else {
+              <div class="alert alert-danger">Password is required</div>
+              }
+             }
+
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email"> Email Address </label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-envelope-fill"></i>
+
+            <input type="email" name="email" inputmode="email" id="email" placeholder="Enter email address" [(ngModel)]="patient.email"/>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group full-width">
+          <label for="address"> Address </label>
+
+          <div class="textarea-wrapper">
+            <i class="bi bi-geo-alt-fill"></i>
+
+            <textarea id="address" rows="4" name="address" placeholder="Enter patient's address" [(ngModel)]="patient.address"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+           FORM FOOTER
+      ========================== -->
+
+      <div class="form-footer">
+        <button  type="button" class="cancel-btn" routerLink="/dashboard/admin/patient">
+          <i class="bi bi-x-lg"></i>
+          Cancel
+        </button>
+
+           <button  type="reset" class="cancel-btn">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          Reset
+        </button>
+
+        <button type="submit" [disabled]="patientForm.invalid" class="save-btn">
+          <i class="bi bi-person-plus-fill"></i>
+          Add Patient
+        </button>
+      </div>
+      </form>
+    </div>
+   </div>
+</div>

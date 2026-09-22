@@ -1,0 +1,522 @@
+<div class="appointment-view-page">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Appointment Details</h1>
+      <p>View complete appointment information</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/admin/appointment">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Appointments
+
+    </button>
+
+    
+  </div>
+
+
+  <!-- Appointment Summary -->
+
+  <div class="appointment-summary">
+
+    <div class="summary-left">
+
+      <div class="appointment-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>Appointment #APT-{{appointment.id}}</h2>
+
+        <span>
+          <i class="bi bi-calendar3"></i>
+         {{appointment.appointmentDate | date:'dd/MMM/yyyy'}}
+        </span>
+
+        <span>
+          <i class="bi bi-clock"></i>
+          {{formatTime(appointment.appointmentTime)}}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-right">
+      
+
+
+      <span class="status confirmed">
+        <i class="bi bi-check-circle-fill"></i>
+        {{appointment.appointmentStatus}}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- Patient + Doctor -->
+
+  <div class="two-column">
+
+
+    <!-- Patient -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div>
+
+          <h2>Patient</h2>
+          <p>Patient information</p>
+
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar">
+          {{appointment.patient.firstName.charAt(0) }} {{appointment.patient.lastName.charAt(0)}}
+        </div>
+
+        <div>
+
+          <h3>{{appointment.patient.firstName }} {{appointment.patient.lastName}}</h3>
+
+          <span>
+            Patient ID: #PT-{{appointment.patient.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+          <span>Phone</span>
+          <strong>+91 {{appointment.patient.phoneNumber}}</strong>
+        </div>
+
+        <div>
+          <span>Blood Group</span>
+          <strong>{{appointment.patient.bloodGroup}}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Doctor -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+          <i class="bi bi-person-badge-fill"></i>
+        </div>
+
+        <div>
+
+          <h2>Doctor</h2>
+          <p>Assigned doctor information</p>
+
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar doctor-avatar">
+          {{appointment.doctor.firstName.charAt(0) }} {{appointment.doctor.lastName.charAt(0)}}
+        </div>
+
+        <div>
+
+          <h3>Dr. {{appointment.doctor.firstName }} {{appointment.doctor.lastName}}</h3>
+
+          <span>
+            Doctor ID: #DR-{{appointment.doctor.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+          <span>Specialization</span>
+          <strong>{{appointment.doctor.specialization}}</strong>
+        </div>
+
+        <div>
+          <span>Qualification</span>
+          <strong>{{appointment.doctor.qualification}}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Appointment Information -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-calendar2-event-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>Appointment Information</h2>
+        <p>Details about this appointment</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Appointment Date
+        </span>
+
+        <strong>
+          {{appointment.appointmentDate | date:'dd/MMM/yyyy'}}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Appointment Time
+        </span>
+
+        <strong>
+          {{formatTime(appointment.appointmentTime)}}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Status
+        </span>
+
+        <span class="status confirmed">
+          {{appointment.appointmentStatus}}
+        </span>
+
+      </div>
+
+
+      <div class="detail-item full-width">
+
+        <span class="detail-label">
+          Reason for Visit
+        </span>
+
+        <strong>
+          {{appointment.reason}}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Prescription -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon prescription-icon">
+        <i class="bi bi-prescription2"></i>
+      </div>
+
+      <div>
+
+        <h2>Prescription</h2>
+        <p>Prescription associated with this appointment</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="prescription-content">
+
+
+      <div class="prescription-info">
+
+        <div>
+
+          <span class="detail-label">
+            Prescription ID
+          </span>
+
+          <strong>
+            #PR-{{appointment.prescription?.id}}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span class="detail-label">
+            Prescription Date
+          </span>
+
+          <strong>
+            {{appointment.prescription?.prescriptionDate | date:'dd/MMM/yyyy'}}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="diagnosis-box">
+
+        <span class="detail-label">
+          Diagnosis
+        </span>
+
+        <h3>
+          {{appointment.prescription?.diagnosis}}
+        </h3>
+
+        <p>
+          {{appointment.prescription?.notes}}
+        </p>
+
+      </div>
+
+
+      <!-- Medicines -->
+
+      <div class="medicine-heading">
+
+        <h3>
+          <i class="bi bi-capsule-pill"></i>
+          Medicines
+        </h3>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Medicine</th>
+              <th>Dosage</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Notes</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+            @for (medicine of appointment.prescription?.medicine; track medicine.id) {
+            <tr>
+
+              <td>
+                <strong>{{medicine.name}}</strong>
+              </td>
+
+              <td>
+               {{medicine.dosage}}
+              </td>
+
+              <td>
+                {{medicine.frequency}}
+              </td>
+
+              <td>
+               {{medicine.duration}}
+              </td>
+
+              <td>
+                {{medicine.notes}}
+              </td>
+
+            </tr>
+          }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="prescription-notes">
+
+        <i class="bi bi-journal-text"></i>
+
+        <div>
+
+          <span>
+            Prescription Notes
+          </span>
+
+          <p>
+            {{appointment.prescription?.notes}}
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- Billing -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon billing-icon">
+        <i class="bi bi-receipt-cutoff"></i>
+      </div>
+
+      <div>
+
+        <h2>Billing Information</h2>
+        <p>Billing associated with this appointment</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="billing-content">
+
+
+      <div class="billing-row">
+
+        <span>
+          Consultation Fee
+        </span>
+
+        <strong>
+          {{appointment.bill?.consultationFee}}
+        </strong>
+
+      </div>
+
+
+      <div class="billing-row">
+
+        <span>
+          Medicine Charges
+        </span>
+
+        <strong>
+          {{appointment.bill?.medicineCharges}}
+        </strong>
+
+      </div>
+
+
+      <div class="billing-row">
+
+        <span>
+          Other Charges
+        </span>
+
+        <strong>
+          {{appointment.bill?.otherCharges}}
+        </strong>
+
+      </div>
+
+
+      <div class="billing-divider"></div>
+
+
+      <div class="billing-total">
+
+        <span>
+          Total Amount
+        </span>
+
+        <strong>
+          {{appointment.bill?.totalAmount | currency:'INR' }}
+        </strong>
+
+      </div>
+
+
+      <div class="payment-status">
+
+        <span>
+          Payment Status
+        </span>
+
+        <span class="status paid">
+          <i class="bi bi-check-circle-fill"></i>
+          {{appointment.bill?.paymentStatus}}
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</div>

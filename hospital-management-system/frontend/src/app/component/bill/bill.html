@@ -1,0 +1,183 @@
+<div class="billing-page">
+  <div class="page-header">
+    <div>
+      <h1>Billing</h1>
+      <p>Manage hospital bills and payments</p>
+    </div>
+
+    <button class="add-btn" routerLink="/dashboard/admin/add-bill">
+      <i class="bi bi-receipt-cutoff"></i>
+      Create Bill
+    </button>
+  </div>
+
+  <!-- Statistics -->
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="bi bi-receipt-cutoff"></i>
+      </div>
+
+      <div>
+        <span>Total Bills</span>
+        <h2>{{ totalBills }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon paid-icon">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div>
+        <span>Paid Bills</span>
+        <h2>{{ paidBills }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon pending-icon">
+        <i class="bi bi-hourglass-split"></i>
+      </div>
+
+      <div>
+        <span>Pending Payments</span>
+        <h2>{{ pendingBills }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Billing Card -->
+
+  <div class="data-card">
+    <div class="table-header">
+      <div>
+        <h2>Billing List</h2>
+
+        <p>All hospital bills and payment records</p>
+      </div>
+
+      <div class="table-actions">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Search bill..."
+            [(ngModel)]="searchText"
+            (input)="searchBillByPatientName()"
+          />
+        </div>
+
+        <!-- Filter -->
+        <button class="filter-btn" type="button" (click)="filterPatientsByNames()">
+          <i class="bi bi-sort-alpha-down"></i>
+          <span>A → Z</span>
+        </button>
+
+        <button class="filter-btn" type="button" (click)="filterPatientsByNames()">
+          <i class="bi bi-sort-alpha-up"></i>
+          <span>Z → A</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Bill ID</th>
+
+            <th>Billing Date</th>
+
+            <th>Consultation</th>
+
+            <th>Medicine</th>
+
+            <th>Other Charges</th>
+
+            <th>Total Amount</th>
+
+            <th>Payment Status</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Bill 1 -->
+
+          @for (bill of sortedBill | paginate: { itemsPerPage: '5', currentPage: '1' }; track bill.id) {
+            <tr>
+              <td>
+                <div class="bill-info">
+                  <div class="bill-icon">
+                    <i class="bi bi-receipt"></i>
+                  </div>
+
+                  <div>
+                    <strong>#BL-{{ bill.id }}</strong>
+
+                    <span
+                      >{{ bill.appointment.patient.firstName }}
+                      {{ bill.appointment.patient.lastName }}</span
+                    >
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                {{ bill.billingDate }}
+              </td>
+
+              <td>₹{{ bill.consultationFee }}</td>
+
+              <td>₹{{ bill.medicineCharges }}</td>
+
+              <td>₹{{ bill.otherCharges }}</td>
+
+              <td>
+                <strong class="total-amount"> ₹{{ bill.totalAmount }} </strong>
+              </td>
+
+              <td>
+                <span class="payment-status paid">
+                  {{ bill.paymentStatus }}
+                </span>
+              </td>
+
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view-btn" [routerLink]="['/dashboard/admin/view-bill',bill.id]">
+                    <i class="bi bi-eye-fill"></i>
+                  </button>
+
+                  <button class="action-btn edit-btn"
+                  [routerLink]="['/dashboard/admin/update-bill',bill.id]">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+
+                  <button class="action-btn print-btn"
+                  (click)="printBill()">
+                    <i class="bi bi-printer-fill"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination">
+      <span>Showing 5 of {{ bills.length }} bills</span>
+
+      <pagination-controls (pageChange)="p = $event"> </pagination-controls>
+    </div>
+  </div>
+</div>

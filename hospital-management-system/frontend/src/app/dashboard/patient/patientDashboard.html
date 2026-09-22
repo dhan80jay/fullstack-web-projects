@@ -1,0 +1,637 @@
+<div class="patient-dashboard">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="bi bi-hospital-fill"></i>
+      </div>
+
+      <div>
+        <h2>HealthCare</h2>
+        <span>Hospital Management</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <p class="menu-title">MAIN MENU</p>
+
+      <a href="#" class="nav-item active">
+        <i class="bi bi-grid-1x2-fill nav-icon"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        href="#"
+        class="nav-item"
+        (click)="$event.preventDefault(); scrollToSection('recent-appointments')"
+      >
+        <i class="bi bi-calendar-check-fill nav-icon"></i>
+        <span>My Appointments</span>
+      </a>
+
+      <a
+        href="#"
+        class="nav-item"
+        (click)="$event.preventDefault(); scrollToSection('prescriptions')"
+      >
+        <i class="bi bi-prescription2 nav-icon"></i>
+        <span>Prescriptions</span>
+      </a>
+
+      <a href="#" class="nav-item" (click)="$event.preventDefault(); scrollToSection('bills')">
+        <i class="bi bi-receipt-cutoff nav-icon"></i>
+        <span>My Bills</span>
+      </a>
+    </nav>
+
+    <!-- Logout -->
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item logout">
+        <i class="bi bi-box-arrow-right nav-icon"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+
+  <main class="main-content">
+    <!-- ================= TOPBAR ================= -->
+
+    <header class="topbar">
+      <div class="page-title">
+        <h1>My Dashboard</h1>
+
+        <p>Welcome back, {{ patient.firstName }}</p>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Profile -->
+
+        <div class="profile">
+          <div class="profile-avatar">
+            {{ patient.firstName.charAt(0) }} {{ patient.lastName.charAt(0) }}
+          </div>
+
+          <div class="profile-info">
+            <strong>{{ patient.firstName }} {{ patient.lastName }}</strong>
+
+            <span>Patient</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="content">
+      <!-- ================= WELCOME CARD ================= -->
+
+      <div class="welcome-card">
+        <div class="welcome-content">
+          <span class="welcome-label"> Good Morning 👋 </span>
+
+          <h2>Welcome back, {{ patient.firstName }}!</h2>
+
+          <p>
+            Stay healthy and keep track of your appointments, prescriptions and medical records.
+          </p>
+
+          <a routerLink="/dashboard/patient/book-appointment" class="primary-btn">
+            <i class="bi bi-calendar-plus"></i>
+
+            Book Appointment
+          </a>
+        </div>
+
+        <div class="welcome-icon">
+          <i class="bi bi-person-heart"></i>
+        </div>
+      </div>
+
+      <!-- ================= STATISTICS ================= -->
+
+      <div class="stats-grid">
+        <!-- Appointments -->
+
+        <div class="stat-card">
+          <div class="stat-icon appointment-icon">
+            <i class="bi bi-calendar-check-fill"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Upcoming Appointments</span>
+
+            <h2>{{ upcomingAppointment }}</h2>
+
+            <small> Next appointment in {{ upcomingAppointmentDays }} days </small>
+          </div>
+        </div>
+
+        <!-- Prescriptions -->
+
+        <div class="stat-card">
+          <div class="stat-icon prescription-icon">
+            <i class="bi bi-prescription2"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Active Prescriptions</span>
+
+            <h2>{{ getActivePrescriptionCount() }}</h2>
+          </div>
+        </div>
+
+        <!-- Medical Records -->
+
+        <!-- <div class="stat-card">
+
+          <div class="stat-icon records-icon">
+
+            <i class="bi bi-file-medical-fill"></i>
+
+          </div>
+
+          <div class="stat-info">
+
+            <span>Medical Records</span>
+
+            <h2>8</h2>
+
+            <small>
+              Updated recently
+            </small>
+
+          </div>
+
+        </div> -->
+
+        <!-- Bills -->
+
+        <div class="stat-card">
+          <div class="stat-icon bill-icon">
+            <i class="bi bi-receipt-cutoff"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Pending Bills</span>
+
+            <h2>₹{{ getPendingBillAmount() }}</h2>
+
+            <small> {{ getPendingBillCount() }} payment pending </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= MIDDLE SECTION ================= -->
+
+      <div class="middle-grid">
+        <!-- ================= NEXT APPOINTMENT ================= -->
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <h3>Next Appointment</h3>
+              <p>Your upcoming appointment</p>
+            </div>
+
+            @if (upcomingAppointmentInfo) {
+              <span class="status confirmed">
+                {{ upcomingAppointmentInfo.appointmentStatus }}
+              </span>
+            }
+          </div>
+
+          @if (upcomingAppointmentInfo) {
+            <div class="appointment-card">
+              <div class="doctor-avatar">
+                <i class="bi bi-person-badge-fill"></i>
+              </div>
+
+              <div class="doctor-info">
+                <h3>
+                  Dr. {{ upcomingAppointmentInfo.doctor.firstName }}
+                  {{ upcomingAppointmentInfo.doctor.lastName }}
+                </h3>
+
+                <p>
+                  {{ upcomingAppointmentInfo.doctor.specialization }}
+                </p>
+
+                <span>
+                  <i class="bi bi-hospital"></i>
+                  {{ upcomingAppointmentInfo.doctor.specialization }} Department
+                </span>
+              </div>
+            </div>
+
+            <div class="appointment-details">
+              <div>
+                <i class="bi bi-calendar-event"></i>
+
+                <div>
+                  <small>Date</small>
+
+                  <strong>
+                    {{ upcomingAppointmentInfo.appointmentDate | date: 'dd/MMM/yyyy' }}
+                  </strong>
+                </div>
+              </div>
+
+              <div>
+                <i class="bi bi-clock"></i>
+
+                <div>
+                  <small>Time</small>
+
+                  <strong>
+                    {{ formatTime(upcomingAppointmentInfo.appointmentTime) }}
+                  </strong>
+                </div>
+              </div>
+
+              <div>
+                <i class="bi bi-geo-alt"></i>
+
+                <div>
+                  <small>Reason</small>
+
+                  <strong>
+                    {{ upcomingAppointmentInfo.reason }}
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="appointment-actions">
+              <button class="outline-btn" type="button" (click)="cancelAppointment()">
+                <i class="bi bi-calendar-x"></i>
+                Cancel
+              </button>
+
+              <!-- <button
+        class="primary-small-btn"
+        type="button">
+
+        <i class="bi bi-calendar-check"></i>
+        View Details
+
+      </button> -->
+            </div>
+          } @else {
+            <div class="no-appointment">
+              <i class="bi bi-calendar-x"></i>
+
+              <h3>No Upcoming Appointment</h3>
+
+              <p>You don't have any upcoming appointments.</p>
+
+              <a routerLink="/dashboard/patient/book-appointment" class="primary-small-btn">
+                <i class="bi bi-calendar-plus"></i>
+                Book Appointment
+              </a>
+            </div>
+          }
+        </div>
+        <!-- ================= HEALTH INFORMATION ================= -->
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div>
+              <h3>My Health Information</h3>
+
+              <p>Basic medical information</p>
+            </div>
+
+            <a [routerLink]="['update-patient', patient.id]" class="edit-link">
+              <i class="bi bi-pencil"></i>
+              Edit
+            </a>
+          </div>
+
+          <div class="health-info">
+            <div class="health-item">
+              <div class="health-icon">
+                <i class="bi bi-droplet-fill"></i>
+              </div>
+
+              <div>
+                <span>Blood Group</span>
+                <strong>{{ patient.bloodGroup }}</strong>
+              </div>
+            </div>
+
+            <div class="health-item">
+              <div class="health-icon">
+                <i class="bi bi-person"></i>
+              </div>
+
+              <div>
+                <span>Gender</span>
+                <strong>{{ patient.gender }}</strong>
+              </div>
+            </div>
+
+            <div class="health-item">
+              <div class="health-icon">
+                <i class="bi bi-calendar3"></i>
+              </div>
+
+              <div>
+                <span>Date of Birth</span>
+                <strong>{{ patient.dateOfBirth | date: 'dd/MMM/yyyy' }}</strong>
+              </div>
+            </div>
+
+            <div class="health-item">
+              <div class="health-icon">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+
+              <div>
+                <span>Phone</span>
+                <strong>+91 {{ patient.phoneNumber }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="emergency-box">
+            <div class="emergency-icon">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+
+            <div>
+              <strong>Emergency Contact</strong>
+
+              <span> +91 98765 43210 </span>
+            </div>
+
+            <a href="tel:+919876543210">
+              <i class="bi bi-telephone-fill"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <section class="router-content">
+        <router-outlet></router-outlet>
+      </section>
+
+      <!-- ================= RECENT APPOINTMENTS ================= -->
+
+      <div class="recent-section" id="recent-appointments">
+        <div class="recent-header">
+          <div>
+            <h3>Recent Appointments</h3>
+            <p>Your appointment history</p>
+          </div>
+        </div>
+
+        @if (appointments.length > 0) {
+          <div class="recent-table-wrapper">
+            <table class="recent-appointments-table">
+              <thead>
+                <tr>
+                  <th>DOCTOR</th>
+                  <th>DEPARTMENT</th>
+                  <th>DATE</th>
+                  <th>TIME</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (
+                  appointment of appointments
+                    | paginate: { itemsPerPage: 3, currentPage: appointmentPage };
+                  track appointment.id
+                ) {
+                  <tr>
+                    <td>
+                      <div class="recent-doctor">
+                        <div class="recent-doctor-avatar">
+                          {{ appointment.doctor.firstName.charAt(0) }}
+                          {{ appointment.doctor.lastName.charAt(0) }}
+                        </div>
+
+                        <div class="recent-doctor-details">
+                          <strong>
+                            Dr. {{ appointment.doctor.firstName }}
+                            {{ appointment.doctor.lastName }}
+                          </strong>
+
+                          <small>
+                            {{ appointment.doctor.specialization }}
+                          </small>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      {{ appointment.doctor.specialization }}
+                    </td>
+
+                    <td>
+                      {{ appointment.appointmentDate | date: 'dd MMM yyyy' }}
+                    </td>
+
+                    <td>
+                      {{ formatTime(appointment.appointmentTime) }}
+                    </td>
+
+                    <td>
+                      <span
+                        class="recent-status"
+                        [class.recent-completed]="appointment.appointmentStatus === 'COMPLETED'"
+                        [class.recent-cancelled]="appointment.appointmentStatus === 'CANCELLED'"
+                        [class.recent-booked]="appointment.appointmentStatus === 'BOOKED'"
+                      >
+                        {{ appointment.appointmentStatus }}
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Appointment Pagination -->
+
+          <div class="pagination">
+            <span> Showing {{ appointments.length }} appointments </span>
+
+            <pagination-controls (pageChange)="appointmentPage = $event"> </pagination-controls>
+          </div>
+        } @else {
+          <div class="recent-empty">
+            <i class="bi bi-calendar-x"></i>
+
+            <h4>No Appointments</h4>
+
+            <p>You don't have any appointment history yet.</p>
+
+            <a routerLink="/dashboard/patient/book-appointment" class="recent-book-btn">
+              <i class="bi bi-calendar-plus"></i>
+              Book Appointment
+            </a>
+          </div>
+        }
+      </div>
+      <!-- ================= PRESCRIPTIONS ================= -->
+      <div class="prescription-section" id="prescriptions">
+        <div class="prescription-header">
+          <div>
+            <h3>Current Prescriptions</h3>
+            <p>Your active medications</p>
+          </div>
+        </div>
+
+        @if (getCurrentPrescriptions().length > 0) {
+          <div class="patient-prescription-list">
+            @for (
+              item of getCurrentPrescriptions()
+                | paginate
+                  : {
+                      itemsPerPage: 3,
+                      currentPage: prescriptionPage,
+                    };
+              track item.medicine.id
+            ) {
+              <div class="patient-prescription-item">
+                <div class="patient-medicine-left">
+                  <div class="patient-medicine-icon">
+                    <i class="bi bi-capsule-pill"></i>
+                  </div>
+
+                  <div class="patient-medicine-info">
+                    <strong>
+                      {{ item.medicine.name }}
+                    </strong>
+
+                    <span>
+                      {{ item.medicine.dosage }}
+                      ·
+                      {{ item.medicine.frequency }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="patient-medicine-duration">
+                  <small>Duration</small>
+
+                  <strong>
+                    {{ item.medicine.duration }}
+                  </strong>
+                </div>
+
+                <div class="patient-medicine-status">Active</div>
+              </div>
+            }
+          </div>
+
+          <!-- Prescription Pagination -->
+
+          <div class="pagination">
+            <span> Showing {{ getCurrentPrescriptions().length }} prescriptions </span>
+
+            <pagination-controls (pageChange)="prescriptionPage = $event"> </pagination-controls>
+          </div>
+        } @else {
+          <div class="prescription-empty">
+            <i class="bi bi-capsule-pill"></i>
+
+            <h4>No Current Prescriptions</h4>
+
+            <p>You don't have any active medications.</p>
+          </div>
+        }
+      </div>
+
+      <!-- ================= BILLS ================= -->
+
+      <div class="bill-section" id="bills">
+        <div class="bill-header">
+          <div>
+            <h3>Billing History</h3>
+            <p>Your hospital billing information</p>
+          </div>
+        </div>
+
+        @if (bills.length > 0) {
+          <div class="bill-table-wrapper">
+            <table class="patient-bill-table">
+              <thead>
+                <tr>
+                  <th>BILL DATE</th>
+                  <th>APPOINTMENT DATE</th>
+                  <th>CONSULTATION</th>
+                  <th>MEDICINE</th>
+                  <th>OTHER</th>
+                  <th>TOTAL</th>
+                  <th>PAYMENT STATUS</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (
+                  bill of bills
+                    | paginate
+                      : {
+                          itemsPerPage: 3,
+                          currentPage: billPage,
+                        };
+                  track bill.id
+                ) {
+                  <tr>
+                    <td>
+                      {{ bill.billingDate | date: 'dd MMM yyyy' }}
+                    </td>
+
+                    <td>
+                      {{ bill.billingDate | date: 'dd MMM yyyy' }}
+                    </td>
+
+                    <td>₹{{ bill.consultationFee }}</td>
+
+                    <td>₹{{ bill.medicineCharges }}</td>
+
+                    <td>₹{{ bill.otherCharges }}</td>
+
+                    <td>
+                      <strong class="bill-total"> ₹{{ bill.totalAmount }} </strong>
+                    </td>
+
+                    <td>
+                      <span
+                        class="bill-payment-status"
+                        [class.bill-paid]="bill.paymentStatus === 'PAID'"
+                        [class.bill-pending]="bill.paymentStatus === 'PENDING'"
+                      >
+                        {{ bill.paymentStatus }}
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span> Showing {{ bills.length }} bills </span>
+
+            <pagination-controls (pageChange)="billPage = $event"> </pagination-controls>
+          </div>
+        } @else {
+          <div class="bill-empty">
+            <i class="bi bi-receipt"></i>
+
+            <h4>No Billing History</h4>
+
+            <p>You don't have any bills yet.</p>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>

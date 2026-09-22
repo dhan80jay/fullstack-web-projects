@@ -1,0 +1,298 @@
+<div class="form-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Schedule Appointment</h1>
+      <p>Create a new patient appointment</p>
+    </div>
+
+    <button
+      type="button"
+      routerLink="/dashboard/admin/appointment"
+      class="back-btn">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Appointments
+
+    </button>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <div class="form-card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-calendar-plus-fill"></i>
+      </div>
+
+      <div>
+        <h2>Appointment Information</h2>
+        <p>Select the patient, doctor and appointment details</p>
+      </div>
+
+    </div>
+
+
+    <!-- FORM START -->
+
+    <form
+      class="form-body"
+      #myForm="ngForm"
+      (ngSubmit)="createAppointment()">
+
+
+      <div class="section-title">
+
+        <i class="bi bi-calendar2-event-fill"></i>
+        Appointment Details
+
+      </div>
+
+
+      <div class="form-grid">
+
+
+        <!-- Patient -->
+
+        <div class="form-group">
+
+          <label for="patient">
+            Patient <span>*</span>
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-person-fill"></i>
+
+            <select
+              id="patient"
+              name="patient"
+              [(ngModel)]="appointment.patient"
+              required>
+
+              <option
+                [ngValue]="null">
+
+                Select patient
+
+              </option>
+
+              @for (patient of patients; track patient.id) {
+
+                <option
+                  [ngValue]="patient">
+
+                  {{ patient.firstName }} {{ patient.lastName }}
+
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- Doctor -->
+
+        <div class="form-group">
+
+          <label for="doctor">
+            Doctor <span>*</span>
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-person-badge-fill"></i>
+
+            <select
+              id="doctor"
+              name="doctor"
+              [(ngModel)]="appointment.doctor"
+              required>
+
+              <option
+                [ngValue]="null">
+
+                Select doctor
+
+              </option>
+
+              @for (doctor of doctors; track doctor.id) {
+
+                <option
+                  [ngValue]="doctor">
+
+                  Dr. {{ doctor.firstName }} {{ doctor.lastName }}
+                  - {{ doctor.specialization }}
+
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- Date -->
+
+        <div class="form-group">
+
+          <label for="appointmentDate">
+            Appointment Date <span>*</span>
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-calendar3"></i>
+
+            <input
+              type="date"
+              id="appointmentDate"
+              name="appointmentDate"
+              [(ngModel)]="appointment.appointmentDate"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <!-- Time -->
+
+        <div class="form-group">
+
+          <label for="appointmentTime">
+            Appointment Time <span>*</span>
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-clock-fill"></i>
+
+            <input
+              type="time"
+              id="appointmentTime"
+              name="appointmentTime"
+              [(ngModel)]="appointment.appointmentTime"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="form-group">
+
+          <label for="appointmentStatus">
+            Appointment Status <span>*</span>
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-check2-circle"></i>
+
+            <select
+              id="appointmentStatus"
+              name="appointmentStatus"
+              [(ngModel)]="appointment.appointmentStatus"
+              required>
+
+              <option
+                value=""
+                disabled>
+
+                Select status
+
+              </option>
+
+              @for (status of appointmentStatuses; track status) {
+
+                <option [value]="status">
+
+                  {{ status }}
+
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- Reason -->
+
+        <div class="form-group full-width">
+
+          <label for="reason">
+            Reason for Visit <span>*</span>
+          </label>
+
+          <div class="textarea-box">
+
+            <i class="bi bi-chat-left-text-fill"></i>
+
+            <textarea
+              id="reason"
+              name="reason"
+              [(ngModel)]="appointment.reason"
+              rows="4"
+              placeholder="Enter reason for appointment"
+              required>
+            </textarea>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FORM BUTTONS -->
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          routerLink="/dashboard/admin/appointment">
+
+          <i class="bi bi-x-lg"></i>
+          Cancel
+
+        </button>
+
+
+        <button
+          type="submit"
+          class="save-btn"
+          [disabled]="myForm.invalid">
+
+          <i class="bi bi-calendar-check-fill"></i>
+          Schedule Appointment
+
+        </button>
+
+      </div>
+
+
+    </form>
+
+    <!-- FORM END -->
+
+  </div>
+
+</div>

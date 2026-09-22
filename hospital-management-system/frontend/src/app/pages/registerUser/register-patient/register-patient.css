@@ -1,0 +1,658 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.register-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #f5f7fb;
+
+  padding: 35px 20px;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.register-brand {
+  text-align: center;
+
+  margin-bottom: 18px;
+}
+
+.register-brand-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #1565c0;
+  color: #ffffff;
+
+  font-size: 21px;
+}
+
+.register-brand h1 {
+  margin: 0;
+
+  color: #172b4d;
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.register-brand p {
+  margin: 3px 0 0;
+
+  color: #8b95a5;
+
+  font-size: 11px;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.register-header {
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+.register-header h2 {
+  margin: 0;
+
+  color: #172b4d;
+
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.register-header p {
+  margin: 5px 0 0;
+
+  color: #8b95a5;
+
+  font-size: 11px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.form-card {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e6ed;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: 0 5px 20px rgba(23, 43, 77, 0.06);
+}
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.form-card-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 18px 24px;
+
+  border-bottom: 1px solid #eef0f4;
+}
+
+.header-icon {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 13px;
+
+  border-radius: 9px;
+
+  background: #e8f1ff;
+
+  color: #1565c0;
+
+  font-size: 18px;
+}
+
+.form-card-header h3 {
+  margin: 0;
+
+  color: #172b4d;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form-card-header p {
+  margin: 4px 0 0;
+
+  color: #8b95a5;
+
+  font-size: 10px;
+}
+
+/* =========================
+   FORM BODY
+========================= */
+
+.form-body {
+  width: 100%;
+
+  padding: 24px;
+}
+
+.form-body form {
+  width: 100%;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 16px;
+
+  color: #344054;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.section-title i {
+  color: #1565c0;
+
+  font-size: 14px;
+}
+
+.section-spacing {
+  margin-top: 28px;
+}
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  column-gap: 22px;
+  row-gap: 17px;
+}
+
+/* Full width field */
+
+.full-width {
+  grid-column: 1 / 3;
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  display: block;
+
+  width: 100%;
+
+  margin: 0 0 7px;
+
+  color: #344054;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  line-height: 16px;
+}
+
+.form-group label span {
+  color: #d33b3b;
+
+  margin-left: 2px;
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.input-box {
+  width: 100%;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d9dee6;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
+}
+
+.input-box i {
+  width: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #98a2b3;
+
+  font-size: 13px;
+}
+
+.input-box input,
+.input-box select {
+  flex: 1;
+
+  min-width: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 11px 0 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #344054;
+
+  font-family: inherit;
+
+  font-size: 11px;
+}
+
+.input-box input::placeholder {
+  color: #a0a7b3;
+}
+
+.input-box select {
+  cursor: pointer;
+}
+
+.input-box:focus-within {
+  border-color: #1565c0;
+
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
+}
+
+.input-box:focus-within i {
+  color: #1565c0;
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+.textarea-box {
+  width: 100%;
+  min-height: 82px;
+
+  display: flex;
+  align-items: flex-start;
+
+  border: 1px solid #d9dee6;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  transition: 0.2s ease;
+}
+
+.textarea-box i {
+  width: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+
+  padding-top: 11px;
+
+  color: #98a2b3;
+
+  font-size: 13px;
+}
+
+.textarea-box textarea {
+  flex: 1;
+
+  width: 100%;
+  min-height: 80px;
+
+  padding: 10px 11px 10px 0;
+
+  border: none;
+  outline: none;
+
+  resize: vertical;
+
+  background: transparent;
+
+  color: #344054;
+
+  font-family: inherit;
+
+  font-size: 11px;
+}
+
+.textarea-box textarea::placeholder {
+  color: #a0a7b3;
+}
+
+.textarea-box:focus-within {
+  border-color: #1565c0;
+
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
+}
+
+.textarea-box:focus-within i {
+  color: #1565c0;
+}
+
+/* =========================
+   VALIDATION
+========================= */
+
+.alert.alert-danger {
+  width: 100%;
+
+  margin: 4px 0 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #d33b3b;
+
+  font-size: 9px;
+
+  line-height: 13px;
+}
+
+.input-box input.ng-invalid.ng-touched,
+.input-box select.ng-invalid.ng-touched {
+  border-color: #d33b3b;
+}
+
+/* =========================
+   FORM FOOTER
+========================= */
+
+.form-footer {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 28px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #eef0f4;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d9dee6;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  text-decoration: none;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #f8f9fb;
+}
+
+/* =========================
+   RESET BUTTON
+========================= */
+
+.reset-btn {
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d9dee6;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background: #f8f9fb;
+}
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-btn {
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 16px;
+
+  border: 1px solid #1565c0;
+
+  border-radius: 7px;
+
+  background: #1565c0;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.register-btn:hover:not(:disabled) {
+  background: #0d57aa;
+}
+
+.register-btn:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+/* =========================
+   FOOTER TEXT
+========================= */
+
+.register-footer {
+  width: 100%;
+
+  text-align: center;
+
+  margin-top: 15px;
+
+  color: #98a2b3;
+
+  font-size: 9px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .register-page {
+    padding: 25px 15px;
+  }
+
+  .register-container {
+    max-width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-body {
+    padding: 20px;
+  }
+
+  .form-card-header {
+    padding: 18px 20px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .back-btn,
+  .reset-btn,
+  .register-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .register-page {
+    padding: 20px 10px;
+  }
+
+  .form-body {
+    padding: 16px;
+  }
+
+  .form-card-header {
+    padding: 16px;
+  }
+
+  .register-brand h1 {
+    font-size: 21px;
+  }
+
+  .register-header h2 {
+    font-size: 19px;
+  }
+}

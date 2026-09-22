@@ -1,0 +1,282 @@
+<div class="view-patient-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Patient Details</h1>
+      <p>View patient information and appointment history</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/doctor/patients"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Back to Patients
+    </button>
+
+  </div>
+
+
+  @if (loading) {
+
+    <div class="loading-card">
+
+      <i class="bi bi-hourglass-split"></i>
+
+      <span>Loading patient information...</span>
+
+    </div>
+
+  }
+
+
+  @if (!loading && patient) {
+
+    <div class="profile-card">
+
+      <div class="profile-header">
+
+        <div class="profile-avatar">
+
+          {{ patient.firstName.charAt(0) }}
+          {{ patient.lastName.charAt(0) }}
+
+        </div>
+
+        <div class="profile-name">
+
+          <h2>
+            {{ patient.firstName }}
+            {{ patient.lastName }}
+          </h2>
+
+          <span>
+            Patient ID: #PT-{{ patient.id }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="profile-info-grid">
+
+        <div class="info-item">
+
+          <span class="info-label">Gender</span>
+
+          <strong>
+            {{ patient.gender }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="info-label">Date of Birth</span>
+
+          <strong>
+            {{ patient.dateOfBirth | date:'dd/MMM/yyyy' }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="info-label">Blood Group</span>
+
+          <strong>
+            {{ patient.bloodGroup }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="info-label">Phone Number</span>
+
+          <strong>
+            {{ patient.phoneNumber }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="info-label">Email</span>
+
+          <strong>
+            {{ patient.email }}
+          </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="info-label">Address</span>
+
+          <strong>
+            {{ patient.address }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-card">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>Appointment History</h2>
+
+          <p>
+            Appointments with you
+          </p>
+
+        </div>
+
+        <div class="appointment-count">
+
+          <i class="bi bi-calendar-check"></i>
+
+          {{ appointments.length }}
+
+        </div>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Reason</th>
+              <th>Status</th>
+              <!-- <th>Action</th> -->
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (appointment of appointments; track appointment.id) {
+
+              <tr>
+
+                <td>
+                  {{ appointment.appointmentDate | date:'dd/MMM/yyyy' }}
+                </td>
+
+                <td>
+                  {{ formatTime(appointment.appointmentTime) }}
+                </td>
+
+                <td>
+                  {{ appointment.reason }}
+                </td>
+
+                <td>
+
+                  <span
+                    class="status"
+                    [ngClass]="getStatusClass(appointment.appointmentStatus)"
+                  >
+                    {{ appointment.appointmentStatus }}
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <!-- <button
+                    class="view-btn"
+                    [routerLink]="[
+                      '/dashboard/doctor/view-appointment',
+                      appointment.id
+                    ]"
+                  >
+                    <i class="bi bi-eye-fill"></i>
+                    View
+                  </button> -->
+
+                </td>
+
+              </tr>
+
+            }
+
+
+            @if (appointments.length === 0) {
+
+              <tr>
+
+                <td
+                  colspan="5"
+                  class="empty-state"
+                >
+                  <i class="bi bi-calendar-x"></i>
+
+                  <span>
+                    No appointments found for this patient.
+                  </span>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  @if (!loading && !patient) {
+
+    <div class="empty-patient">
+
+      <i class="bi bi-person-x"></i>
+
+      <h2>Patient Not Found</h2>
+
+      <p>
+        The requested patient could not be found.
+      </p>
+
+      <button
+        class="back-btn"
+        routerLink="/dashboard/doctor/patients"
+      >
+        <i class="bi bi-arrow-left"></i>
+        Back to Patients
+      </button>
+
+    </div>
+
+  }
+
+</div>

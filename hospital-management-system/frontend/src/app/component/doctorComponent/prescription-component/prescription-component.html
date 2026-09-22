@@ -1,0 +1,253 @@
+<div class="prescriptions-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Prescriptions</h1>
+      <p>View and manage prescriptions for your patients</p>
+    </div>
+
+    <button
+      type="button"
+      class="create-btn"
+      routerLink="/dashboard/doctor/create-prescription">
+      <i class="bi bi-plus-lg"></i>
+      Create Prescription
+    </button>
+
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        <i class="bi bi-prescription2"></i>
+      </div>
+
+      <div>
+        <span>Total Prescriptions</span>
+        <h2>{{ prescriptions.length }}</h2>
+      </div>
+
+    </div>
+
+    <div class="stat-card">
+
+      <div class="stat-icon today-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+        <span>Today's Prescriptions</span>
+        <h2>{{ registeredToday }}</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Prescription Table -->
+  <div class="data-card">
+
+    <div class="table-header">
+
+      <div>
+        <h2>Prescription List</h2>
+        <p>Prescriptions created for your patients</p>
+      </div>
+
+      <div class="table-actions">
+
+        <!-- Search -->
+        <div class="search-box">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Search patient..."
+            [(ngModel)]="searchText"
+            (input)="searchPatientByName()">
+
+        </div>
+
+        <!-- Sort A-Z -->
+        <button
+          class="filter-btn"
+          type="button"
+          (click)="filterPatientsByNames()">
+
+          <i class="bi bi-sort-alpha-down"></i>
+          <span>A → Z</span>
+
+        </button>
+
+        <!-- Sort Z-A -->
+        <button
+          class="filter-btn"
+          type="button"
+          (click)="filterPatientsByNames()">
+
+          <i class="bi bi-sort-alpha-up"></i>
+          <span>Z → A</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Prescription</th>
+            <th>Diagnosis</th>
+            <th>Prescription Date</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (
+            prescription of sortedPrescription | paginate: {
+              itemsPerPage: 5,
+              currentPage: p
+            };
+            track prescription.id
+          ) {
+
+            <tr>
+
+              <!-- Prescription -->
+              <td>
+
+                <div class="prescription-info">
+
+                  <div class="prescription-icon">
+                    <i class="bi bi-prescription2"></i>
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      Prescription #PR-{{ prescription.id }}
+                    </strong>
+
+                    <span>
+                      Patient:
+                      {{ prescription.appointment.patient.firstName }}
+                      {{ prescription.appointment.patient.lastName }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <!-- Diagnosis -->
+              <td>
+                {{ prescription.diagnosis }}
+              </td>
+
+              <!-- Prescription Date -->
+              <td>
+                {{ prescription.prescriptionDate | date:'dd/MMM/yyyy' }}
+              </td>
+
+              <!-- Notes -->
+              <td>
+                {{ prescription.notes }}
+              </td>
+
+              <!-- Actions -->
+              <td>
+
+                <div class="action-buttons">
+
+                  <!-- View -->
+                  <button
+                    type="button"
+                    class="action-btn view-btn"
+                    [routerLink]="[
+                      '/dashboard/doctor/view-prescription',
+                      prescription.id
+                    ]"
+                    title="View Prescription">
+
+                    <i class="bi bi-eye-fill"></i>
+
+                  </button>
+
+                  <!-- Update -->
+                  <button
+                    type="button"
+                    class="action-btn edit-btn"
+                    [routerLink]="[
+                      '/dashboard/doctor/update-prescription',
+                      prescription.id
+                    ]"
+                    title="Update Prescription">
+
+                    <i class="bi bi-pencil-fill"></i>
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+          <!-- Empty State -->
+          @if (sortedPrescription.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="5"
+                class="text-center text-muted">
+
+                Prescription Not Found!
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+
+      <span>
+        Showing {{ sortedPrescription.length }} prescriptions
+      </span>
+
+      <pagination-controls
+        (pageChange)="p = $event">
+      </pagination-controls>
+
+    </div>
+
+  </div>
+
+</div>  

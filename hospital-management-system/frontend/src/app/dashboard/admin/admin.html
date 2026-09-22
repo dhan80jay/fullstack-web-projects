@@ -1,0 +1,123 @@
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <i class="bi bi-hospital-fill hs-icon"></i>
+      <div>
+        <h2>HealthCare</h2>
+        <span>Hospital Management</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <p class="menu-title">MAIN MENU</p>
+
+      <a routerLink="/dashboard/admin" class="nav-item active">
+        <i class="bi bi-grid-1x2-fill nav-icon"></i> <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/dashboard/admin/patient"  class="nav-item">
+        <i class="bi bi-people-fill nav-icon"></i> <span>Patients</span>
+      </a>
+
+      <a routerLink="/dashboard/admin/doctor" class="nav-item">
+        <i class="bi bi-person-badge-fill nav-icon"></i>
+        <span>Doctors</span>
+      </a>
+
+      <a routerLink="/dashboard/admin/appointment" class="nav-item">
+        <i class="bi bi-calendar-check-fill nav-icon"></i>
+        <span>Appointments</span>
+      </a>
+
+      <p class="menu-title">MANAGEMENT</p>
+
+      <a routerLink="/dashboard/admin/prescription" class="nav-item">
+        <i class="bi bi-prescription2 nav-icon"></i>
+        <span>Prescriptions</span>
+      </a>
+      <a routerLink="/dashboard/admin/billing" class="nav-item">
+        <i class="bi bi-receipt-cutoff nav-icon"></i>
+        <span>Bills</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a (click)="logout()" class="nav-item logout">
+        <i class="bi bi-box-arrow-right nav-icon"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="page-title">
+        <h1>Dashboard</h1>
+        <p>Welcome back, Admin</p>
+      </div>
+
+      <div class="topbar-right">
+        <div class="profile">
+          <div class="profile-avatar">A</div>
+
+          <div class="profile-info">
+            <strong>Admin</strong>
+            <span>Administrator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="content">
+      <!-- Statistics -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon patients-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Total Patients</span>
+            <h2>{{totalPatients()}}</h2>
+            <small class="positive"><i class="bi bi-arrow-up"></i> 12.5% this month</small>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon doctors-icon">
+            <i class="bi bi-person-badge-fill"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Total Doctors</span>
+            <h2>{{totalDoctors()}}</h2>
+            <small class="positive"><i class="bi bi-arrow-up"></i> 5.2% this month</small>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon appointment-icon">
+            <i class="bi bi-calendar-check-fill"></i>
+          </div>
+
+          <div class="stat-info">
+            <span>Appointments</span>
+            <h2>{{totalAppointments()}}</h2>
+            <small class="positive"><i class="bi bi-arrow-up"></i> 8.4% this week</small>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Middle Section -->
+                <router-outlet></router-outlet>
+
+
+    </section>
+  </main>
+</div>

@@ -1,0 +1,334 @@
+<div class="add-patient-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>Update Doctor</h1>
+      <p>Enter the doctor's information below</p>
+    </div>
+
+    <a routerLink="/dashboard/admin/doctor" class="back-btn">
+      <i class="bi bi-arrow-left"></i>
+      Back to Doctors
+    </a>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <div class="form-header">
+      <div class="form-header-icon">
+        <i class="bi bi-person-badge-fill"></i>
+      </div>
+
+      <div>
+        <h2>Doctor Information</h2>
+        <p>Please provide the doctor's basic and professional information</p>
+      </div>
+    </div>
+
+    <div class="form-body">
+      <!-- =========================
+           PERSONAL INFORMATION
+      ========================== -->
+
+      <div class="section-title">
+        <i class="bi bi-person-vcard-fill"></i>
+
+        <span>Personal Information</span>
+      </div>
+
+      <form #doctorForm="ngForm" (ngSubmit)="updateDoctor()">
+        <div class="form-grid">
+          <!-- First Name -->
+          <div class="form-group">
+            <label for="firstName">
+              First Name
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person"></i>
+
+              <input
+                type="text"
+                id="firstName"
+                name="fname"
+                #fnameRef="ngModel"
+                placeholder="Enter first name"
+                [(ngModel)]="doctor.firstName"
+                required
+              />
+            </div>
+
+            @if (fnameRef.invalid && fnameRef.touched) {
+              <div class="alert alert-danger">First Name is required</div>
+            }
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <label for="lastName">
+              Last Name
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person"></i>
+
+              <input
+                type="text"
+                id="lastName"
+                name="lname"
+                #lnameRef="ngModel"
+                placeholder="Enter last name"
+                [(ngModel)]="doctor.lastName"
+                required
+              />
+            </div>
+
+            @if (lnameRef.invalid && lnameRef.touched) {
+              <div class="alert alert-danger">Last Name is required</div>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">
+              Email Address
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-envelope-fill"></i>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                #emailRef="ngModel"
+                inputmode="email"
+                placeholder="Enter email address"
+                [(ngModel)]="doctor.email"
+                required
+                email
+              />
+            </div>
+
+            @if (emailRef.invalid && emailRef.touched) {
+              @if (emailRef.hasError('email')) {
+                <div class="alert alert-danger">Invalid email address</div>
+              } @else {
+                <div class="alert alert-danger">Email is required</div>
+              }
+            }
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phoneNumber">
+              Phone Number
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-telephone-fill"></i>
+
+              <input
+                type="tel"
+                inputmode="numeric"
+                id="phoneNumber"
+                name="phone"
+                #phoneRef="ngModel"
+                placeholder="Enter phone number"
+                [(ngModel)]="doctor.phoneNumber"
+                pattern="[0-9]{10}"
+                required
+              />
+            </div>
+
+            @if (phoneRef.invalid && phoneRef.touched) {
+              @if (phoneRef.hasError('pattern')) {
+                <div class="alert alert-danger">Invalid phone number</div>
+              } @else {
+                <div class="alert alert-danger">Phone number is required</div>
+              }
+            }
+          </div>
+
+          <!-- Username -->
+          <div class="form-group">
+            <label for="username">
+              Username
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-fill"></i>
+
+              <input
+                type="text"
+                id="username"
+                name="user"
+                #userRef="ngModel"
+                placeholder="Enter username"
+                [(ngModel)]="doctor.user.username"
+                required
+              />
+            </div>
+
+            @if (userRef.invalid && userRef.touched) {
+              <div class="alert alert-danger">Username is required</div>
+            }
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">
+              Password
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-lock-fill"></i>
+
+              <input
+                type="password"
+                id="password"
+                name="pass"
+                #passRef="ngModel"
+                minlength="6"
+                
+                placeholder="Enter password"
+                [(ngModel)]="doctor.user.password"
+                required
+              />
+            </div>
+
+            @if (passRef.invalid && passRef.touched) {
+              @if (passRef.hasError('minlength')) {
+                <div class="alert alert-danger">Minimum 6 characters</div>
+              } @else {
+                <div class="alert alert-danger">Password is required</div>
+              }
+            }
+          </div>
+        </div>
+
+        <!-- =========================
+             PROFESSIONAL INFORMATION
+        ========================== -->
+
+        <div class="section-title section-spacing">
+          <i class="bi bi-mortarboard-fill"></i>
+
+          <span>Professional Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Qualification -->
+          <div class="form-group">
+            <label for="qualification">
+              Qualification
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-mortarboard"></i>
+
+              <input
+                type="text"
+                id="qualification"
+                name="qualification"
+                #qualificationRef="ngModel"
+                placeholder="e.g. MBBS, MD"
+                [(ngModel)]="doctor.qualification"
+                required
+              />
+            </div>
+
+            @if (qualificationRef.invalid && qualificationRef.touched) {
+              <div class="alert alert-danger">Qualification is required</div>
+            }
+          </div>
+
+          <!-- Specialization -->
+          <div class="form-group">
+            <label for="specialization">
+              Specialization
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-heart-pulse-fill"></i>
+
+              <input
+                type="text"
+                id="specialization"
+                name="specialization"
+                #specializationRef="ngModel"
+                placeholder="e.g. Cardiology"
+                [(ngModel)]="doctor.specialization"
+                required
+              />
+            </div>
+
+            @if (specializationRef.invalid && specializationRef.touched) {
+              <div class="alert alert-danger">Specialization is required</div>
+            }
+          </div>
+
+          <!-- Experience -->
+          <div class="form-group">
+            <label for="experienceYears">
+              Experience
+              <span>*</span>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-award-fill"></i>
+
+              <input
+                type="number"
+                id="experienceYears"
+                name="experienceYears"
+                #experienceRef="ngModel"
+                placeholder="Years of experience"
+                [(ngModel)]="doctor.experienceYears"
+                min="0"
+                required
+              />
+            </div>
+
+            @if (experienceRef.invalid && experienceRef.touched) {
+              <div class="alert alert-danger">Experience is required</div>
+            }
+          </div>
+
+        </div>
+
+        <!-- =========================
+             FORM FOOTER
+        ========================== -->
+
+        <div class="form-footer">
+          <!-- Cancel -->
+          <button type="button" class="cancel-btn" routerLink="/dashboard/admin/doctor">
+            <i class="bi bi-x-lg"></i>
+            Cancel
+          </button>
+
+          <!-- Reset -->
+          <button type="reset" class="cancel-btn">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Reset
+          </button>
+
+          <!-- Save -->
+          <button type="submit" [disabled]="doctorForm.invalid" class="save-btn">
+            <i class="bi bi-person-plus-fill"></i>
+            Update Doctor
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

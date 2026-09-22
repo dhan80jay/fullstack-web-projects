@@ -1,0 +1,179 @@
+<div class="appointments-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>Appointments</h1>
+      <p>Manage and view all hospital appointments</p>
+    </div>
+
+    <button class="add-btn" routerLink="/dashboard/admin/add-appointment">
+      <i class="bi bi-calendar-plus-fill"></i>
+      Add Appointment
+    </button>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+        <span>Total Appointments</span>
+        <h2>{{ appointments.length }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon today-icon">
+        <i class="bi bi-calendar-day-fill"></i>
+      </div>
+
+      <div>
+        <span>Today's Appointments</span>
+        <h2>{{ registeredToday }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon pending-icon">
+        <i class="bi bi-hourglass-split"></i>
+      </div>
+
+      <div>
+        <span>Pending</span>
+        <h2>{{ pendingAppointments }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon completed-icon">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div>
+        <span>Completed</span>
+        <h2>{{ completedAppointments }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="data-card">
+    <div class="table-header">
+      <div>
+        <h2>Appointment List</h2>
+        <p>All scheduled appointments</p>
+      </div>
+
+      <div class="table-actions">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+
+          <input type="text" placeholder="Search appointment..." 
+          [(ngModel)]="searchText"
+          (input)="searchAppointmentByPatientName()"
+          />
+        </div>
+
+        <div class="sort-buttons">
+          <button class="filter-btn" type="button" (click)="filterAppointmentByPatientName()">
+            <i class="bi bi-sort-alpha-down"></i>
+            <span>A → Z</span>
+          </button>
+
+          <button class="filter-btn" type="button" (click)="filterAppointmentByPatientName()">
+            <i class="bi bi-sort-alpha-up"></i>
+            <span>Z → A</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (
+            appointment of sortedAppointment | paginate: { itemsPerPage: 5, currentPage: p };
+            track appointment.id
+          ) {
+            <tr>
+              <td>
+                <div class="person-info">
+                  <div class="avatar">
+                    {{ appointment.patient.firstName.charAt(0) }}
+                    {{ appointment.patient.lastName.charAt(0) }}
+                  </div>
+
+                  <div>
+                    <strong
+                      >{{ appointment.patient.firstName }}
+                      {{ appointment.patient.lastName }}</strong
+                    >
+                    <span>#PT-{{ appointment.patient.id }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td>Dr. {{ appointment.doctor.firstName }} {{ appointment.doctor.lastName }}</td>
+
+              <td>{{ appointment.appointmentDate | date: 'dd/MMM/yyyy' }}</td>
+
+              <td>{{ formatTime(appointment.appointmentTime) }}</td>
+
+              <td>{{ appointment.reason }}</td>
+
+              <td>
+                <span class="status confirmed"> {{ appointment.appointmentStatus }} </span>
+              </td>
+
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn view-btn"
+                  [routerLink]="['/dashboard/admin/view-appointment',appointment.id]">
+                    <i class="bi bi-eye-fill"></i>
+                  </button>
+
+                  <button class="action-btn edit-btn"
+                  [routerLink]="['/dashboard/admin/update-appointment',appointment.id]">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+
+                  <button class="action-btn delete-btn"
+                  (click)="deleteAppointment(appointment.id)">
+                    <i class="bi bi-trash3-fill"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+          @if (sortedAppointment.length === 0) {
+            <tr>
+              <td colspan="6" class="text-center text-muted">Appointment Not Found!</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span> Showing {{ appointments.length }} appointments </span>
+
+      <pagination-controls (pageChange)="p = $event"> </pagination-controls>
+    </div>
+  </div>
+</div>

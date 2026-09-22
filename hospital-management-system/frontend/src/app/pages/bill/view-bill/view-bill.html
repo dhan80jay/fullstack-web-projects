@@ -1,0 +1,619 @@
+<div class="billing-view-page">
+
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>Bill Details</h1>
+
+      <p>
+        View complete billing information
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/admin/billing">
+
+      <i class="bi bi-arrow-left"></i>
+
+      Back to Billing
+
+    </button>
+
+  </div>
+
+
+
+  <!-- Bill Summary -->
+
+  <div class="bill-summary">
+
+    <div class="summary-left">
+
+
+      <div class="bill-icon">
+
+        <i class="bi bi-receipt-cutoff"></i>
+
+      </div>
+
+
+      <div>
+
+        <h2>
+          Bill #BL-{{ bill.id }}
+        </h2>
+
+        <span>
+
+          <i class="bi bi-calendar3"></i>
+
+          {{ bill.billingDate | date:'dd MMM yyyy' }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="summary-right">
+
+
+      <span
+        class="status"
+        [class.paid]="bill.paymentStatus === 'PAID'"
+        [class.pending]="bill.paymentStatus === 'PENDING'"
+        [class.failed]="bill.paymentStatus === 'FAILED'">
+
+        @if (bill.paymentStatus === 'PAID') {
+
+          <i class="bi bi-check-circle-fill"></i>
+
+        }
+
+        @if (bill.paymentStatus === 'PENDING') {
+
+          <i class="bi bi-clock-fill"></i>
+
+        }
+
+        @if (bill.paymentStatus === 'FAILED') {
+
+          <i class="bi bi-x-circle-fill"></i>
+
+        }
+
+        {{ bill.paymentStatus }}
+
+      </span>
+
+
+      <button
+        type="button"
+        class="print-btn"
+        (click)="printBill()">
+
+        <i class="bi bi-printer-fill"></i>
+
+        Print Bill
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Patient + Appointment -->
+
+  <div class="two-column">
+
+
+    <!-- Patient -->
+
+    <div class="details-card">
+
+
+      <div class="card-header">
+
+        <div class="header-icon">
+
+          <i class="bi bi-person-fill"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+            Patient
+          </h2>
+
+          <p>
+            Patient information
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="person-details">
+
+
+        <div class="person-avatar">
+
+          {{ appointment.patient.firstName.charAt(0) }}
+          {{ appointment.patient.lastName.charAt(0) }}
+
+        </div>
+
+
+        <div>
+
+          <h3>
+
+            {{ appointment.patient.firstName }}
+
+            {{ appointment.patient.lastName }}
+
+          </h3>
+
+
+          <span>
+
+            Patient ID:
+
+            #PT-{{ appointment.patient.id }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="mini-details">
+
+
+        <div>
+
+          <span>
+            Phone
+          </span>
+
+          <strong>
+
+            {{ appointment.patient.phoneNumber || 'N/A' }}
+
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Blood Group
+          </span>
+
+          <strong>
+
+            {{ appointment.patient.bloodGroup || 'N/A' }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Appointment -->
+
+    <div class="details-card">
+
+
+      <div class="card-header">
+
+        <div class="header-icon appointment-icon">
+
+          <i class="bi bi-calendar-check-fill"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+            Appointment
+          </h2>
+
+          <p>
+            Related appointment information
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="appointment-details">
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment ID
+          </span>
+
+          <strong>
+
+            #APT-{{ appointment.id }}
+
+          </strong>
+
+        </div>
+
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Doctor
+          </span>
+
+          <strong>
+
+            Dr.
+
+            {{ appointment.doctor.firstName }}
+
+            {{ appointment.doctor.lastName }}
+
+          </strong>
+
+        </div>
+
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Date
+          </span>
+
+          <strong>
+
+            {{ appointment.appointmentDate | date:'dd MMM yyyy' }}
+
+          </strong>
+
+        </div>
+
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Time
+          </span>
+
+          <strong>
+
+            {{ appointment.appointmentTime }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Billing Information -->
+
+  <div class="details-card">
+
+
+    <div class="card-header">
+
+
+      <div class="header-icon billing-header-icon">
+
+        <i class="bi bi-cash-stack"></i>
+
+      </div>
+
+
+      <div>
+
+        <h2>
+          Billing Information
+        </h2>
+
+        <p>
+          Complete breakdown of charges
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="billing-content">
+
+
+      <!-- Consultation Fee -->
+
+      <div class="billing-row">
+
+
+        <div class="charge-info">
+
+
+          <div class="charge-icon">
+
+            <i class="bi bi-person-check-fill"></i>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              Consultation Fee
+            </strong>
+
+            <span>
+              Doctor consultation charges
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <strong class="amount">
+
+          ₹{{ bill.consultationFee | number:'1.2-2' }}
+
+        </strong>
+
+      </div>
+
+
+
+      <!-- Medicine Charges -->
+
+      <div class="billing-row">
+
+
+        <div class="charge-info">
+
+
+          <div class="charge-icon medicine">
+
+            <i class="bi bi-capsule-pill"></i>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              Medicine Charges
+            </strong>
+
+            <span>
+              Medicines prescribed during consultation
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <strong class="amount">
+
+          ₹{{ bill.medicineCharges | number:'1.2-2' }}
+
+        </strong>
+
+      </div>
+
+
+
+      <!-- Other Charges -->
+
+      <div class="billing-row">
+
+
+        <div class="charge-info">
+
+
+          <div class="charge-icon other">
+
+            <i class="bi bi-three-dots"></i>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              Other Charges
+            </strong>
+
+            <span>
+              Additional hospital charges
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <strong class="amount">
+
+          ₹{{ bill.otherCharges | number:'1.2-2' }}
+
+        </strong>
+
+      </div>
+
+
+
+      <div class="billing-divider"></div>
+
+
+
+      <!-- Total -->
+
+      <div class="total-row">
+
+        <span>
+          Total Amount
+        </span>
+
+        <strong>
+
+          ₹{{ bill.totalAmount | number:'1.2-2' }}
+
+        </strong>
+
+      </div>
+
+
+
+      <!-- Payment -->
+
+      <div class="payment-row">
+
+
+        <div>
+
+          <span class="detail-label">
+            Payment Status
+          </span>
+
+
+          <strong>
+
+            @if (bill.paymentStatus === 'PAID') {
+
+              Payment received
+
+            }
+
+            @if (bill.paymentStatus === 'PENDING') {
+
+              Payment pending
+
+            }
+
+            @if (bill.paymentStatus === 'FAILED') {
+
+              Payment failed
+
+            }
+
+          </strong>
+
+        </div>
+
+
+
+        <span
+          class="status"
+          [class.paid]="bill.paymentStatus === 'PAID'"
+          [class.pending]="bill.paymentStatus === 'PENDING'"
+          [class.failed]="bill.paymentStatus === 'FAILED'">
+
+          @if (bill.paymentStatus === 'PAID') {
+
+            <i class="bi bi-check-circle-fill"></i>
+
+          }
+
+          @if (bill.paymentStatus === 'PENDING') {
+
+            <i class="bi bi-clock-fill"></i>
+
+          }
+
+          @if (bill.paymentStatus === 'FAILED') {
+
+            <i class="bi bi-x-circle-fill"></i>
+
+          }
+
+          {{ bill.paymentStatus }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Bill Footer -->
+
+  <div class="bill-footer">
+
+
+    <div>
+
+      <i class="bi bi-info-circle-fill"></i>
+
+
+      <span>
+
+        Bill generated for appointment
+
+        #APT-{{ appointment.id }}
+
+      </span>
+
+    </div>
+
+
+
+    <button
+      type="button"
+      class="print-btn"
+      (click)="printBill()">
+
+      <i class="bi bi-printer-fill"></i>
+
+      Print Bill
+
+    </button>
+
+  </div>
+
+
+</div>

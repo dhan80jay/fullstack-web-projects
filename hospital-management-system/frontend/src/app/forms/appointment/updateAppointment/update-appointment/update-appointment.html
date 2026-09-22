@@ -1,0 +1,230 @@
+<div class="update-appointment-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Update Appointment</h1>
+      <p>Update appointment information</p>
+    </div>
+
+    <button type="button" class="back-btn"
+     (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+      Back to Appointment
+    </button>
+
+  </div>
+
+
+  <form #myForm="ngForm" (ngSubmit)="updateAppointment()">
+
+    <!-- Appointment Information -->
+    <div class="form-card">
+
+      <div class="form-header">
+
+        <div class="form-header-icon">
+          <i class="bi bi-calendar2-event-fill"></i>
+        </div>
+
+        <div>
+          <h2>Appointment Information</h2>
+          <p>Update the date, time, status and reason for the appointment</p>
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <!-- Appointment Date -->
+        <div class="form-group">
+
+          <label for="appointmentDate">
+            Appointment Date
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-calendar3"></i>
+
+            <input
+              type="date"
+              id="appointmentDate"
+              name="appointmentDate"
+              required
+              [(ngModel)]="appointment.appointmentDate">
+            
+          </div>
+
+        </div>
+
+
+        <!-- Appointment Time -->
+        <div class="form-group">
+
+          <label for="appointmentTime">
+            Appointment Time
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-clock-fill"></i>
+
+            <input
+              type="time"
+              id="appointmentTime"
+              name="appointmentTime"
+              required
+              [(ngModel)]="appointment.appointmentTime">
+
+          </div>
+
+        </div>
+
+
+        <!-- Appointment Status -->
+        <div class="form-group">
+
+          <label for="appointmentStatus">
+            Appointment Status
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+<select
+  id="appointmentStatus"
+  name="appointmentStatus"
+  [(ngModel)]="appointment.appointmentStatus"
+  required>
+
+  <option value="">Select status</option>
+
+  @for (status of appointmentStatuses; track status) {
+    <option [value]="status">
+      {{ status }}
+    </option>
+  }
+
+</select>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- Reason -->
+      <div class="form-group reason-group">
+
+        <label for="reason">
+          Reason for Visit
+          <span>*</span>
+        </label>
+
+        <div class="textarea-wrapper">
+
+          <i class="bi bi-chat-left-text-fill"></i>
+
+          <textarea
+            id="reason"
+            name="reason"
+            rows="4"
+            placeholder="Enter reason for visit"
+            required
+            [(ngModel)]="appointment.reason"
+            ></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Patient Information -->
+    <div class="form-card">
+
+      <div class="form-header">
+
+        <div class="form-header-icon patient-icon">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div>
+          <h2>Patient Information</h2>
+          <p>Patient associated with this appointment</p>
+        </div>
+
+      </div>
+
+
+      <div class="patient-display">
+
+        <div class="patient-avatar">
+          RS
+        </div>
+
+        <div class="patient-details">
+
+          <h3>Rahul Sharma</h3>
+
+          <span>
+            Patient ID: #PT-002
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="patient-note">
+
+        <i class="bi bi-info-circle-fill"></i>
+
+        <span>
+          Patient information cannot be changed while updating an appointment.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+       (click)="goBack()">
+
+        <i class="bi bi-x-lg"></i>
+        Cancel
+
+      </button>
+
+
+      <button
+        type="submit"
+        class="save-btn"
+        [disabled]="myForm.invalid"
+        >
+
+        <i class="bi bi-check-lg"></i>
+        Update Appointment
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

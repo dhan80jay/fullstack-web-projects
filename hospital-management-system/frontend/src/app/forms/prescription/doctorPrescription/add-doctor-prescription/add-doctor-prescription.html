@@ -1,0 +1,544 @@
+<div class="create-prescription-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Create Prescription</h1>
+      <p>Create a prescription for your completed appointment</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/doctor/prescriptions">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Prescriptions
+
+    </button>
+
+  </div>
+
+
+  <!-- Loading -->
+  @if (loading) {
+
+    <div class="loading-card">
+
+      <div class="spinner"></div>
+
+      <p>Loading appointments...</p>
+
+    </div>
+
+  }
+
+
+  @if (!loading) {
+
+    <form
+      #prescriptionForm="ngForm"
+      (ngSubmit)="createPrescription()"
+      class="prescription-form">
+
+
+      <!-- Appointment Information -->
+      <div class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+
+          <div>
+            <h2>Appointment Information</h2>
+            <p>Select a completed appointment</p>
+          </div>
+
+        </div>
+
+
+        <div class="form-body">
+
+          <div class="form-group full-width">
+
+            <label for="appointment">
+              Appointment <span>*</span>
+            </label>
+
+            <select
+              id="appointment"
+              name="appointment"
+              [(ngModel)]="prescription.appointment"
+              (ngModelChange)="onAppointmentChange()"
+              required>
+
+              <option
+                [ngValue]="null">
+                Select Appointment
+              </option>
+
+              @for (appointment of appointments; track appointment.id) {
+
+                <option [ngValue]="appointment">
+
+                  Appointment #{{ appointment.id }}
+                  -
+                  {{ appointment.patient.firstName }}
+                  {{ appointment.patient.lastName }}
+                  -
+                  {{ appointment.appointmentDate | date:'dd/MM/yyyy' }}
+                  -
+                  {{ appointment.appointmentTime }}
+
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+
+          @if (prescription.appointment) {
+
+            <div class="appointment-details">
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Appointment ID
+                </span>
+
+                <strong>
+                  #{{ prescription.appointment.id }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Patient
+                </span>
+
+                <strong>
+                  {{ prescription.appointment.patient.firstName }}
+                  {{ prescription.appointment.patient.lastName }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Appointment Date
+                </span>
+
+                <strong>
+                  {{ prescription.appointment.appointmentDate | date:'dd/MM/yyyy' }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Appointment Time
+                </span>
+
+                <strong>
+                  {{ prescription.appointment.appointmentTime }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Doctor
+                </span>
+
+                <strong>
+                  Dr.
+                  {{ doctor.firstName }}
+                  {{ doctor.lastName }}
+                </strong>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <span class="detail-label">
+                  Status
+                </span>
+
+                <span class="status-badge">
+                  COMPLETED
+                </span>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          @if (appointments.length === 0) {
+
+            <div class="empty-appointments">
+
+              <i class="bi bi-calendar-x"></i>
+
+              <h3>No appointments available</h3>
+
+              <p>
+                There are no completed appointments available
+                for creating a prescription.
+              </p>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- Prescription Information -->
+      <div class="form-card">
+
+        <div class="card-header">
+
+          <div class="card-icon">
+            <i class="bi bi-prescription2"></i>
+          </div>
+
+          <div>
+            <h2>Prescription Information</h2>
+            <p>Enter diagnosis and prescription details</p>
+          </div>
+
+        </div>
+
+
+        <div class="form-body">
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="prescriptionDate">
+                Prescription Date <span>*</span>
+              </label>
+
+              <input
+                type="date"
+                id="prescriptionDate"
+                name="prescriptionDate"
+                [(ngModel)]="prescription.prescriptionDate"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Patient
+              </label>
+
+              <input
+                type="text"
+                [value]="
+                  prescription.appointment
+                    ? prescription.appointment.patient.firstName +
+                      ' ' +
+                      prescription.appointment.patient.lastName
+                    : ''
+                "
+                readonly>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group full-width">
+
+            <label for="diagnosis">
+              Diagnosis <span>*</span>
+            </label>
+
+            <input
+              type="text"
+              id="diagnosis"
+              name="diagnosis"
+              placeholder="Enter diagnosis"
+              [(ngModel)]="prescription.diagnosis"
+              required>
+
+          </div>
+
+
+          <div class="form-group full-width">
+
+            <label for="notes">
+              Notes
+            </label>
+
+            <textarea
+              id="notes"
+              name="notes"
+              rows="4"
+              placeholder="Enter additional notes..."
+              [(ngModel)]="prescription.notes">
+            </textarea>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Medicines -->
+      <div class="form-card">
+
+        <div class="card-header medicine-header">
+
+          <div class="header-content">
+
+            <div class="card-icon">
+              <i class="bi bi-capsule"></i>
+            </div>
+
+            <div>
+              <h2>Medicines</h2>
+              <p>Add medicines prescribed to the patient</p>
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="add-medicine-btn"
+            (click)="addMedicine()">
+
+            <i class="bi bi-plus-lg"></i>
+            Add Medicine
+
+          </button>
+
+        </div>
+
+
+        <div class="form-body medicine-body">
+
+          @for (
+            medicine of prescription.medicine;
+            track $index;
+          ) {
+
+            <div class="medicine-card">
+
+              <div class="medicine-title">
+
+                <div>
+
+                  <span class="medicine-number">
+                    Medicine {{ $index + 1 }}
+                  </span>
+
+                  <span class="medicine-subtitle">
+                    Medicine details
+                  </span>
+
+                </div>
+
+
+                @if (prescription.medicine.length > 1) {
+
+                  <button
+                    type="button"
+                    class="remove-medicine-btn"
+                    (click)="removeMedicine($index)"
+                    title="Remove Medicine">
+
+                    <i class="bi bi-trash"></i>
+
+                  </button>
+
+                }
+
+              </div>
+
+
+              <div class="medicine-fields">
+
+                <div class="form-group">
+
+                  <label>
+                    Medicine Name <span>*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    [name]="'medicineName' + $index"
+                    placeholder="Enter medicine name"
+                    [(ngModel)]="medicine.name"
+                    required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label>
+                    Dosage <span>*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    [name]="'dosage' + $index"
+                    placeholder="e.g. 500mg"
+                    [(ngModel)]="medicine.dosage"
+                    required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label>
+                    Frequency <span>*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    [name]="'frequency' + $index"
+                    placeholder="e.g. Twice a day"
+                    [(ngModel)]="medicine.frequency"
+                    required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label>
+                    Duration <span>*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    [name]="'duration' + $index"
+                    placeholder="e.g. 5 days"
+                    [(ngModel)]="medicine.duration"
+                    required>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                  <label>
+                    Medicine Notes
+                  </label>
+
+                  <textarea
+                    rows="3"
+                    [name]="'medicineNotes' + $index"
+                    placeholder="Enter medicine instructions..."
+                    [(ngModel)]="medicine.notes">
+                  </textarea>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          @if (prescription.medicine.length === 0) {
+
+            <div class="no-medicine">
+
+              <i class="bi bi-capsule"></i>
+
+              <h3>No medicines added</h3>
+
+              <p>
+                Click "Add Medicine" to add a medicine.
+              </p>
+
+              <button
+                type="button"
+                class="add-first-medicine-btn"
+                (click)="addMedicine()">
+
+                <i class="bi bi-plus-lg"></i>
+                Add Medicine
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          routerLink="/dashboard/doctor/prescriptions">
+
+          <i class="bi bi-x-lg"></i>
+          Cancel
+
+        </button>
+
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="saving || !prescriptionForm.valid">
+
+          @if (saving) {
+
+            <span class="button-spinner"></span>
+            Creating...
+
+          } @else {
+
+            <i class="bi bi-check-lg"></i>
+            Create Prescription
+
+          }
+
+        </button>
+
+      </div>
+
+    </form>
+
+  }
+
+</div>

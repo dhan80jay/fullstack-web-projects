@@ -1,0 +1,327 @@
+<div class="health-update-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Update Health Information</h1>
+      <p>Update your basic medical information</p>
+    </div>
+
+    <a
+      routerLink="/dashboard/patient"
+      class="back-btn">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Dashboard
+
+    </a>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <div class="form-header">
+
+      <div class="form-header-icon">
+        <i class="bi bi-heart-pulse-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>My Health Information</h2>
+
+        <p>
+          Update your personal health information below
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-body">
+
+      <div class="section-title">
+
+        <i class="bi bi-person-vcard-fill"></i>
+
+        <span>Basic Medical Information</span>
+
+      </div>
+
+
+      <form
+        #patientForm="ngForm"
+        (ngSubmit)="updateHealthInformation()">
+
+
+        <div class="form-grid">
+
+
+          <!-- Date of Birth -->
+
+          <div class="form-group">
+
+            <label for="dateOfBirth">
+
+              Date of Birth
+              <span>*</span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i class="bi bi-calendar3"></i>
+
+              <input
+                type="date"
+                id="dateOfBirth"
+                name="dob"
+                #dobRef="ngModel"
+                [(ngModel)]="patient.dateOfBirth"
+                required />
+
+            </div>
+
+
+            @if (dobRef.invalid && dobRef.touched) {
+
+              <div class="alert alert-danger">
+                Date of birth is required
+              </div>
+
+            }
+
+          </div>
+
+
+          <!-- Gender -->
+
+          <div class="form-group">
+
+            <label for="gender">
+
+              Gender
+              <span>*</span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i class="bi bi-gender-ambiguous"></i>
+
+              <select
+                id="gender"
+                name="gender"
+                #genRef="ngModel"
+                [(ngModel)]="patient.gender"
+                required>
+
+                <option value="">
+                  Select gender
+                </option>
+
+                <option value="Male">
+                  Male
+                </option>
+
+                <option value="Female">
+                  Female
+                </option>
+
+                <option value="Other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+
+            @if (genRef.invalid && genRef.touched) {
+
+              <div class="alert alert-danger">
+                Gender is required
+              </div>
+
+            }
+
+          </div>
+
+
+          <!-- Blood Group -->
+
+          <div class="form-group">
+
+            <label for="bloodGroup">
+
+              Blood Group
+              <span>*</span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i class="bi bi-droplet-fill"></i>
+
+              <select
+                id="bloodGroup"
+                name="bloodGroup"
+                #bloodRef="ngModel"
+                [(ngModel)]="patient.bloodGroup"
+                required>
+
+                <option value="">
+                  Select blood group
+                </option>
+
+                <option value="A+">
+                  A+
+                </option>
+
+                <option value="A-">
+                  A-
+                </option>
+
+                <option value="B+">
+                  B+
+                </option>
+
+                <option value="B-">
+                  B-
+                </option>
+
+                <option value="AB+">
+                  AB+
+                </option>
+
+                <option value="AB-">
+                  AB-
+                </option>
+
+                <option value="O+">
+                  O+
+                </option>
+
+                <option value="O-">
+                  O-
+                </option>
+
+              </select>
+
+            </div>
+
+
+            @if (bloodRef.invalid && bloodRef.touched) {
+
+              <div class="alert alert-danger">
+                Blood group is required
+              </div>
+
+            }
+
+          </div>
+
+
+          <!-- Phone Number -->
+
+          <div class="form-group">
+
+            <label for="phoneNumber">
+
+              Phone Number
+              <span>*</span>
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+              <i class="bi bi-telephone-fill"></i>
+
+              <input
+                type="tel"
+                inputmode="numeric"
+                id="phoneNumber"
+                name="phoneNumber"
+                #phoneRef="ngModel"
+                [(ngModel)]="patient.phoneNumber"
+                placeholder="Enter phone number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required />
+
+            </div>
+
+
+            @if (phoneRef.invalid && phoneRef.touched) {
+
+              @if (phoneRef.hasError('pattern')) {
+
+                <div class="alert alert-danger">
+                  Enter a valid 10 digit phone number
+                </div>
+
+              } @else {
+
+                <div class="alert alert-danger">
+                  Phone number is required
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+
+        </div>
+
+
+        <div class="form-footer">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            routerLink="/dashboard/patient">
+
+            <i class="bi bi-x-lg"></i>
+            Cancel
+
+          </button>
+
+
+          <button
+            type="reset"
+            class="reset-btn">
+
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Reset
+
+          </button>
+
+
+          <button
+            type="submit"
+            class="save-btn"
+            [disabled]="patientForm.invalid">
+
+            <i class="bi bi-check-lg"></i>
+            Update Information
+
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

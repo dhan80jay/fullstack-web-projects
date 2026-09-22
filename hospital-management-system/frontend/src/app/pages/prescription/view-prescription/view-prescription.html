@@ -1,0 +1,439 @@
+<div class="prescription-view-page">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Prescription Details</h1>
+      <p>View complete prescription information</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/admin/prescription">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Prescriptions
+
+    </button>
+
+  </div>
+
+
+  <!-- Prescription Summary -->
+
+  <div class="prescription-summary">
+
+    <div class="summary-left">
+
+      <div class="prescription-icon">
+        <i class="bi bi-prescription2"></i>
+      </div>
+
+      <div>
+
+        <h2>Prescription #PR-{{prescription.id}}</h2>
+
+        <span>
+          <i class="bi bi-calendar3"></i>
+         {{prescription.prescriptionDate | date:'dd/MMM/yyyy'}}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-right">
+
+      <span class="status active">
+        <i class="bi bi-check-circle-fill"></i>
+        Active
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- Patient + Doctor -->
+
+  <div class="two-column">
+
+
+    <!-- Patient -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div>
+          <h2>Patient</h2>
+          <p>Patient information</p>
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar">
+          {{appointment.patient.firstName.charAt(0) }} {{appointment.patient.lastName.charAt(0) }}
+        </div>
+
+        <div>
+
+          <h3>{{appointment.patient.firstName }} {{appointment.patient.lastName}}</h3>
+
+          <span>
+            Patient ID: #PT-{{appointment.patient.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+
+          <span>
+            Phone
+          </span>
+
+          <strong>
+            {{appointment.patient.phoneNumber}}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Blood Group
+          </span>
+
+          <strong>
+            {{appointment.patient.bloodGroup}}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Doctor -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon doctor-icon">
+          <i class="bi bi-person-badge-fill"></i>
+        </div>
+
+        <div>
+          <h2>Doctor</h2>
+          <p>Prescribing doctor</p>
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar doctor-avatar">
+          {{appointment.doctor.firstName.charAt(0) }} {{appointment.doctor.lastName.charAt(0)}}
+        </div>
+
+        <div>
+
+          <h3>Dr. {{appointment.doctor.firstName }} {{appointment.doctor.lastName}}</h3>
+
+          <span>
+            Doctor ID: #DR-{{appointment.doctor.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+
+          <span>
+            Specialization
+          </span>
+
+          <strong>
+            {{appointment.doctor.specialization}}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Qualification
+          </span>
+
+          <strong>
+            {{appointment.doctor.qualification}}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Prescription Information -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-file-medical-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>Prescription Information</h2>
+        <p>Diagnosis and prescription details</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="prescription-info">
+
+
+      <div class="info-grid">
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Prescription ID
+          </span>
+
+          <strong>
+            #PR-{{prescription.id}}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Prescription Date
+          </span>
+
+          <strong>
+            {{prescription.prescriptionDate | date:'dd/MMM/yyyy'}}
+          </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment ID
+          </span>
+
+          <strong>
+            #APT-{{appointment.id}}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Diagnosis -->
+
+      <div class="diagnosis-section">
+
+        <span class="detail-label">
+          Diagnosis
+        </span>
+
+        <div class="diagnosis-box">
+
+          <i class="bi bi-heart-pulse-fill"></i>
+
+          <div>
+
+            <h3>
+              {{prescription.diagnosis}}
+            </h3>
+
+            <p>
+              Patient diagnosed with {{prescription.diagnosis}}.
+              Regular monitoring and medication recommended.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Notes -->
+
+      <div class="notes-section">
+
+        <span class="detail-label">
+          Doctor's Notes
+        </span>
+
+        <div class="notes-box">
+
+          <i class="bi bi-journal-text"></i>
+
+          <p>
+            {{prescription.notes}}
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- Medicines -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon medicine-icon">
+        <i class="bi bi-capsule-pill"></i>
+      </div>
+
+      <div>
+
+        <h2>Medicines</h2>
+        <p>Medicines included in this prescription</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Medicine</th>
+            <th>Dosage</th>
+            <th>Frequency</th>
+            <th>Duration</th>
+            <th>Notes</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+        @for (medicine of medicines; track medicine.id) {
+          <tr>
+            <td>
+              <div class="medicine-name">
+
+                <div class="medicine-avatar">
+                  <i class="bi bi-capsule"></i>
+                </div>
+
+                <strong>
+                  {{medicine.name}}
+                </strong>
+
+              </div>
+
+            </td>
+
+            <td>
+              {{medicine.dosage}}
+            </td>
+
+            <td>
+              {{medicine.frequency}}
+            </td>
+
+            <td>
+              {{medicine.duration}}
+            </td>
+
+            <td>
+              {{medicine.notes}}
+            </td>
+
+          </tr>
+        }
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- Prescription Footer -->
+
+  <div class="prescription-footer">
+
+    <div>
+
+      <i class="bi bi-info-circle-fill"></i>
+
+      <span>
+        This prescription is associated with appointment #APT-{{appointment.id}}
+      </span>
+
+    </div>
+
+<button
+  type="button"
+  class="print-btn"
+  (click)="printPrescription()">
+
+  <i class="bi bi-printer-fill"></i>
+  Print Prescription
+
+</button>
+  </div>
+
+
+</div>

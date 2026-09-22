@@ -1,0 +1,307 @@
+<div class="doctor-view-page">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Doctor Details</h1>
+      <p>View complete doctor information</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn"
+      routerLink="/dashboard/admin/doctor">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Doctors
+
+    </button>
+
+  </div>
+
+
+  <!-- Doctor Profile -->
+
+  <div class="profile-card">
+
+    <div class="profile-left">
+
+      <div class="profile-avatar">
+        {{doctor.firstName.charAt(0) }} {{doctor.lastName.charAt(0)}}
+      </div>
+
+      <div class="profile-info">
+
+        <h2>Dr. {{doctor.firstName }} {{doctor.lastName}}</h2>
+
+        <span class="doctor-id">
+          Doctor ID: #DR-{{doctor.id}}
+        </span>
+
+        <span class="doctor-status">
+          <i class="bi bi-circle-fill"></i>
+          Active Doctor
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Professional Information -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-person-badge-fill"></i>
+      </div>
+
+      <div>
+        <h2>Professional Information</h2>
+        <p>Doctor's qualification and specialization</p>
+      </div>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Qualification
+        </span>
+
+        <strong>
+          {{doctor.qualification}}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Specialization
+        </span>
+
+        <strong>
+          {{doctor.specialization}}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Experience
+        </span>
+
+        <strong>
+          {{doctor.experienceYears}}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Contact Information -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-telephone-fill"></i>
+      </div>
+
+      <div>
+        <h2>Contact Information</h2>
+        <p>Doctor's contact details</p>
+      </div>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Phone Number
+        </span>
+
+        <strong>
+          {{doctor.phoneNumber}}
+        </strong>
+
+      </div>
+
+
+      <div class="detail-item">
+
+        <span class="detail-label">
+          Email Address
+        </span>
+
+        <strong>
+          {{doctor.email}}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Appointment History -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+        <h2>Appointment History</h2>
+        <p>Appointments handled by this doctor</p>
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Patient</th>
+
+            <th>Date</th>
+
+            <th>Time</th>
+
+            <th>Reason</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (appointment of doctor.appointments  | paginate: { itemsPerPage: 5, currentPage: p }; track appointment.id) {
+
+          <tr>
+
+            <td>
+
+              <div class="patient-info">
+
+                <div class="patient-avatar">
+                  {{appointment.patient.firstName.charAt(0) }} {{appointment.patient.lastName.charAt(0)}}
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{appointment.patient.firstName }} {{appointment.patient.lastName}}
+                  </strong>
+
+                  <span>
+                    #PT-{{appointment.patient.id}}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>
+              {{appointment.appointmentDate | date:'dd/MMM/yyyy'}}
+            </td>
+
+
+            <td>
+              {{formatTime(appointment.appointmentTime)}}
+            </td>
+
+
+            <td>
+              {{appointment.reason}}
+            </td>
+
+
+            <td>
+
+              <span class="status completed">
+                {{appointment.appointmentStatus}}
+              </span>
+
+            </td>
+
+
+            <td>
+
+              <button
+                type="button"
+                class="view-btn"
+  [routerLink]="['/dashboard/admin/view-doctor', doctor.id, 'view-appointment', appointment.id]"
+
+                >
+
+                <i class="bi bi-eye-fill"></i>
+
+              </button>
+
+            </td>
+
+          </tr>
+        }
+
+
+        </tbody>
+
+
+      </table>
+          <!-- Pagination -->
+
+<!-- Pagination -->
+<div class="pagination-wrapper">
+
+  <span class="pagination-info">
+    Showing {{ doctor.appointments.length }} appointments
+  </span>
+
+  <pagination-controls
+    (pageChange)="p = $event">
+  </pagination-controls>
+
+</div>      
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,364 @@
+<div class="appointment-view-page">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+      <h1>Appointment Details</h1>
+      <p>View complete appointment information</p>
+    </div>
+
+    <button
+      type="button"
+      class="back-btn" 
+      routerLink="../../">
+
+      <i class="bi bi-arrow-left"></i>
+      Back to Appointments
+
+    </button>
+
+  </div>
+
+
+  <!-- Appointment Summary -->
+
+  <div class="appointment-summary">
+
+    <div class="summary-left">
+
+      <div class="appointment-icon">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>Appointment #APT-{{appointment?.id}}</h2>
+
+        <div class="summary-info">
+
+          <span>
+            <i class="bi bi-calendar3"></i>
+           {{appointment?.appointmentDate | date:'dd/MMM/yyyy'}}
+          </span>
+
+          <span>
+            <i class="bi bi-clock-fill"></i>
+           {{formatTime(appointment?.appointmentTime)}}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-right">
+
+      <span class="status confirmed">
+        <i class="bi bi-check-circle-fill"></i>
+        {{appointment?.appointmentStatus}}
+      </span>
+
+      <button
+        type="button"
+        class="edit-btn"
+        [routerLink]="[
+    '/dashboard/admin/view-patient',
+    patientId,
+    'view-appointment',
+    appointment?.id,
+    'update-appointment'
+  ]">
+
+        <i class="bi bi-pencil-fill"></i>
+        Edit Appointment
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Patient & Doctor -->
+
+  <div class="two-column">
+
+
+    <!-- Patient -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div>
+          <h2>Patient</h2>
+          <p>Patient information</p>
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar">
+          {{appointment?.patient?.firstName?.charAt(0)}} {{appointment?.patient?.lastName?.charAt(0)}}
+        </div>
+
+        <div>
+
+          <h3>{{appointment?.patient?.firstName}} {{appointment?.patient?.lastName}}</h3>
+
+          <span>
+            Patient ID: #PT-{{appointment?.patient?.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+
+          <span>
+            Phone
+          </span>
+
+          <strong>
+            {{appointment?.patient?.phoneNumber}}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Blood Group
+          </span>
+
+          <strong>
+            {{appointment?.patient?.bloodGroup}}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Doctor -->
+
+    <div class="details-card">
+
+      <div class="card-header">
+
+        <div class="header-icon doctor-icon">
+          <i class="bi bi-person-badge-fill"></i>
+        </div>
+
+        <div>
+          <h2>Doctor</h2>
+          <p>Assigned doctor information</p>
+        </div>
+
+      </div>
+
+
+      <div class="person-details">
+
+        <div class="person-avatar doctor-avatar">
+          {{appointment?.doctor?.firstName?.charAt(0) }} {{appointment?.doctor?.lastName?.charAt(0)}}
+        </div>
+
+        <div>
+
+          <h3>Dr. {{appointment?.doctor?.firstName }} {{ appointment?.doctor?.lastName}}</h3>
+
+          <span>
+            Doctor ID: #DR-{{appointment?.doctor?.id}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="mini-details">
+
+        <div>
+
+          <span>
+            Specialization
+          </span>
+
+          <strong>
+            {{appointment?.doctor?.specialization}}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Qualification
+          </span>
+
+          <strong>
+            {{appointment?.doctor?.qualification}}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Appointment Information -->
+
+  <div class="details-card">
+
+    <div class="card-header">
+
+      <div class="header-icon appointment-info-icon">
+        <i class="bi bi-calendar2-event-fill"></i>
+      </div>
+
+      <div>
+
+        <h2>Appointment Information</h2>
+        <p>Details about this appointment</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="appointment-info">
+
+
+      <div class="info-grid">
+
+
+        <!-- Appointment ID -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment ID
+          </span>
+
+          <strong>
+            #APT-{{appointment?.id}}
+          </strong>
+
+        </div>
+
+
+        <!-- Appointment Date -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment Date
+          </span>
+
+          <strong>
+            {{appointment?.appointmentDate | date:'dd/MMM/yyyy'}}
+          </strong>
+
+        </div>
+
+
+        <!-- Appointment Time -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment Time
+          </span>
+
+          <strong>
+            {{formatTime(appointment?.appointmentTime)}}
+          </strong>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="detail-item">
+
+          <span class="detail-label">
+            Appointment Status
+          </span>
+
+          <span class="status confirmed">
+            <i class="bi bi-check-circle-fill"></i>
+            {{appointment?.appointmentStatus}}
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- Reason -->
+
+      <div class="reason-section">
+
+        <span class="detail-label">
+          Reason for Visit
+        </span>
+
+        <div class="reason-box">
+
+          <i class="bi bi-chat-left-text-fill"></i>
+
+          <p>
+            {{appointment?.reason}}
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- Appointment Footer -->
+
+  <div class="appointment-footer">
+
+    <div>
+
+      <i class="bi bi-info-circle-fill"></i>
+
+      <span>
+        Appointment information for patient #PT-{{appointment?.id}}
+      </span>
+
+    </div>
+
+  </div>
+
+
+</div>

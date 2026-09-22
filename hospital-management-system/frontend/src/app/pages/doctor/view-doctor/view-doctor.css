@@ -1,0 +1,540 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+}
+
+.doctor-view-page {
+  min-height: calc(100vh - 82px);
+  padding: 30px 35px;
+  background: #f5f7fb;
+}
+
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #172b4d;
+  font-size: 25px;
+}
+
+.page-header p {
+  margin-top: 6px;
+  color: #8b95a5;
+  font-size: 12px;
+}
+
+.back-btn {
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 14px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 7px;
+
+  background: white;
+  color: #667085;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card {
+  background: white;
+
+  border: 1px solid #e9edf3;
+  border-radius: 12px;
+
+  padding: 24px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-avatar {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e8f1ff;
+  color: #1565c0;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.profile-info h2 {
+  margin: 0;
+
+  color: #172b4d;
+
+  font-size: 19px;
+}
+
+.doctor-id {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #8b95a5;
+
+  font-size: 10px;
+}
+
+.doctor-status {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 8px;
+
+  color: #16875d;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.doctor-status i {
+  font-size: 6px;
+}
+
+.edit-btn {
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d9e7f8;
+  border-radius: 7px;
+
+  background: white;
+  color: #1565c0;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   DETAILS CARD
+========================= */
+
+.details-card {
+  background: white;
+
+  border: 1px solid #e9edf3;
+  border-radius: 12px;
+
+  margin-bottom: 20px;
+
+  overflow: hidden;
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header {
+  padding: 19px 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-bottom: 1px solid #eef0f4;
+}
+
+.header-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #e8f1ff;
+  color: #1565c0;
+
+  font-size: 16px;
+}
+
+.card-header h2 {
+  margin: 0;
+
+  color: #172b4d;
+
+  font-size: 14px;
+}
+
+.card-header p {
+  margin-top: 4px;
+
+  color: #8b95a5;
+
+  font-size: 9px;
+}
+
+
+/* =========================
+   DETAILS GRID
+========================= */
+
+.details-grid {
+  padding: 23px 25px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+.detail-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.detail-label {
+  color: #98a2b3;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+
+  font-weight: 600;
+}
+
+.detail-item strong {
+  color: #344054;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  min-width: 750px;
+
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 12px 24px;
+
+  text-align: left;
+
+  color: #8b95a5;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+}
+
+td {
+  padding: 14px 24px;
+
+  border-top: 1px solid #eef0f4;
+
+  color: #667085;
+
+  font-size: 10px;
+}
+
+tbody tr:hover {
+  background: #fafcff;
+}
+
+
+/* =========================
+   PATIENT
+========================= */
+
+.patient-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.patient-avatar {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e8f1ff;
+
+  color: #1565c0;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+.patient-info strong {
+  display: block;
+
+  color: #344054;
+
+  font-size: 10px;
+}
+
+.patient-info span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 8px;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+  display: inline-flex;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+.status.completed {
+  background: #e9f8f1;
+  color: #16875d;
+}
+
+.status.confirmed {
+  background: #e8f1ff;
+  color: #1565c0;
+}
+
+.status.pending {
+  background: #fff4df;
+  color: #c47c00;
+}
+
+
+/* =========================
+   VIEW BUTTON
+========================= */
+
+.view-btn {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid #d9e7f8;
+
+  border-radius: 6px;
+
+  background: white;
+
+  color: #1565c0;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .doctor-view-page {
+    padding: 20px;
+  }
+
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .profile-card {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* Pagination container */
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+/* Showing text */
+.pagination-info {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ngx-pagination container */
+::ng-deep .ngx-pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+/* All pagination buttons */
+::ng-deep .ngx-pagination li {
+  margin: 0 !important;
+}
+
+/* Page numbers */
+::ng-deep .ngx-pagination a,
+::ng-deep .ngx-pagination button {
+  min-width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Hover */
+::ng-deep .ngx-pagination a:hover,
+::ng-deep .ngx-pagination button:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Active page */
+::ng-deep .ngx-pagination .current {
+  min-width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Previous / Next */
+::ng-deep .ngx-pagination .pagination-previous a,
+::ng-deep .ngx-pagination .pagination-next a {
+  font-size: 14px;
+}
+
+/* Disabled Previous / Next */
+::ng-deep .ngx-pagination .disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}

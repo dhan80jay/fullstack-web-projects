@@ -1,0 +1,576 @@
+<div class="doctor-dashboard">
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        <i class="bi bi-hospital-fill"></i>
+      </div>
+
+      <div>
+        <h2>HealthCare</h2>
+        <span>Hospital Management</span>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <p class="menu-title">MAIN MENU</p>
+
+      <a
+        routerLink="/dashboard/doctor"
+        class="nav-item active">
+
+        <i class="bi bi-grid-fill"></i>
+        <span>Dashboard</span>
+
+      </a>
+
+
+      <a
+        routerLink="/dashboard/doctor/patients"
+        class="nav-item">
+
+        <i class="bi bi-people-fill"></i>
+        <span>Patients</span>
+
+      </a>
+
+
+      <a
+        routerLink="/dashboard/doctor/appointments"
+        class="nav-item">
+
+        <i class="bi bi-calendar-check-fill"></i>
+        <span>Appointments</span>
+
+      </a>
+
+
+      <p class="menu-title management-title">MANAGEMENT</p>
+
+
+      <a
+        routerLink="/dashboard/doctor/prescriptions"
+        class="nav-item">
+
+        <i class="bi bi-prescription2"></i>
+        <span>Prescriptions</span>
+
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <button
+        class="logout-btn"
+        type="button"
+        (click)="logout()">
+
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Logout</span>
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= MAIN CONTENT ================= -->
+
+  <main class="main-content">
+
+    <!-- ================= TOP HEADER ================= -->
+
+    <header class="top-header">
+
+      <div class="header-title">
+
+        <h1>Dashboard</h1>
+
+        <p>
+          Welcome back,
+          @if (doctor) {
+            Dr. {{ doctor.firstName }} {{ doctor.lastName }}
+          }
+        </p>
+
+      </div>
+
+
+      <div class="header-right">
+
+ 
+
+
+        @if (doctor) {
+
+          <div class="doctor-profile">
+
+            <div class="profile-avatar">
+              {{ getDoctorInitials() }}
+            </div>
+
+            <div class="profile-info">
+
+              <strong>
+                Dr. {{ doctor.firstName }} {{ doctor.lastName }}
+              </strong>
+
+              <span>
+                {{ doctor.specialization }}
+              </span>
+
+            </div>
+
+
+          </div>
+
+        }
+
+      </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD BODY ================= -->
+
+    <div class="dashboard-content">
+
+
+      <!-- ================= STAT CARDS ================= -->
+
+      <div class="stats-grid">
+
+
+        <!-- TOTAL PATIENTS -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon patients-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+
+          <div class="stat-info">
+
+            <span>Total Patients</span>
+
+            <strong>
+              {{ totalPatients }}
+            </strong>
+
+            <small>
+              Patients assigned to you
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- TODAY'S APPOINTMENTS -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon appointments-icon">
+            <i class="bi bi-calendar-check-fill"></i>
+          </div>
+
+          <div class="stat-info">
+
+            <span>Today's Appointments</span>
+
+            <strong>
+              {{ todayAppointments }}
+            </strong>
+
+            <small>
+              Appointments scheduled today
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- COMPLETED -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon completed-icon">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+
+          <div class="stat-info">
+
+            <span>Completed</span>
+
+            <strong>
+              {{ completedToday }}
+            </strong>
+
+            <small>
+              Today's completed appointments
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon pending-icon">
+            <i class="bi bi-clock-fill"></i>
+          </div>
+
+          <div class="stat-info">
+
+            <span>Pending</span>
+
+            <strong>
+              {{ pendingToday }}
+            </strong>
+
+            <small>
+              Today's pending appointments
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= TODAY'S APPOINTMENTS ================= -->
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>Today's Appointments</h2>
+
+          <p>
+            Appointments scheduled for today
+          </p>
+
+        </div>
+
+
+        <a
+          routerLink="/dashboard/doctor/appointments"
+          class="view-all-btn">
+
+          View All
+
+          <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+      </div>
+
+
+      <div class="appointments-card">
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Patient</th>
+
+                <th>TIME</th>
+
+                <th>REASON</th>
+
+                <th>STATUS</th>
+
+                <!-- <th>ACTION</th> -->
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                appointment of getTodayAppointments();
+                track appointment.id
+              ) {
+
+                <tr>
+
+                  <!-- PATIENT -->
+
+                  <td>
+
+                    <div class="patient-info">
+
+                      <div class="patient-avatar">
+
+                        {{ getPatientInitials(appointment.patient) }}
+
+                      </div>
+
+
+                      <div>
+
+                        <strong>
+
+                          {{ appointment.patient.firstName }}
+                          {{ appointment.patient.lastName }}
+
+                        </strong>
+
+                        <span>
+
+                          #PT-{{ appointment.patient.id }}
+
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- TIME -->
+
+                  <td>
+
+                    {{ formatTime(appointment.appointmentTime) }}
+
+                  </td>
+
+
+                  <!-- REASON -->
+
+                  <td>
+
+                    {{ appointment.reason }}
+
+                  </td>
+
+
+                  <!-- STATUS -->
+
+                  <td>
+
+                    @if (
+                      appointment.appointmentStatus === 'BOOKED'
+                    ) {
+
+                      <span class="status confirmed">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Confirmed
+
+                      </span>
+
+                    }
+
+                    @else if (
+                      appointment.appointmentStatus === 'COMPLETED'
+                    ) {
+
+                      <span class="status completed">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Completed
+
+                      </span>
+
+                    }
+
+                    @else if (
+                      appointment.appointmentStatus === 'CANCELLED'
+                    ) {
+
+                      <span class="status pending">
+
+                        <i class="bi bi-x-circle-fill"></i>
+
+                        Cancelled
+
+                      </span>
+
+                    }
+
+                  </td>
+
+
+                  <!-- ACTION -->
+
+                  <!-- <td>
+
+                    <button
+                      type="button"
+                      class="action-btn view-btn"
+                      title="View Appointment">
+
+                      <i class="bi bi-eye-fill"></i>
+
+                    </button>
+
+                  </td> -->
+
+                </tr>
+
+              }
+
+
+              @if (getTodayAppointments().length === 0) {
+
+                <tr>
+
+                  <td
+                    colspan="5"
+                    class="empty-message">
+
+                    No appointments scheduled for today.
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= BOTTOM SECTION ================= -->
+
+      <div class="bottom-grid">
+
+
+        <!-- ================= UPCOMING APPOINTMENTS ================= -->
+
+        <div class="dashboard-card">
+
+          <div class="card-header">
+
+            <div>
+
+              <h2>Upcoming Appointments</h2>
+
+              <p>
+                Next scheduled appointments
+              </p>
+
+            </div>
+
+            <i class="bi bi-calendar-event-fill"></i>
+
+          </div>
+
+
+          <div class="upcoming-list">
+
+            @for (
+              appointment of upcomingAppointments;
+              track appointment.id
+            ) {
+
+              <div class="upcoming-item">
+
+
+                <div class="date-box">
+
+                  <strong>
+
+                    {{ appointment.appointmentDate | date:'dd' }}
+
+                  </strong>
+
+                  <span>
+
+                    {{ appointment.appointmentDate | date:'MMM' }}
+
+                  </span>
+
+                </div>
+
+
+                <div class="upcoming-info">
+
+                  <strong>
+
+                    {{ appointment.patient.firstName }}
+                    {{ appointment.patient.lastName }}
+
+                  </strong>
+
+
+                  <span>
+
+                    <i class="bi bi-clock"></i>
+
+                    {{ formatTime(appointment.appointmentTime) }}
+
+                  </span>
+
+                </div>
+
+
+                <span class="upcoming-status">
+
+                  {{ appointment.appointmentStatus }}
+
+                </span>
+
+              </div>
+
+            }
+
+
+            @if (upcomingAppointments.length === 0) {
+
+              <div class="empty-message">
+
+                No upcoming appointments.
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+ 
+
+      </div>
+
+
+    </div>
+  <router-outlet></router-outlet>
+
+  </main>
+
+
+</div>

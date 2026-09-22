@@ -1,0 +1,209 @@
+<div class="book-appointment-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Book Appointment</h1>
+      <p>Schedule an appointment with a doctor</p>
+    </div>
+
+    <button type="button" class="back-btn" routerLink="../">
+      <i class="bi bi-arrow-left"></i>
+      Back 
+    </button>
+
+  </div>
+
+
+  <!-- Booking Form -->
+
+  <form>
+
+    <div class="form-card">
+
+      <!-- Form Header -->
+
+      <div class="form-header">
+
+        <div class="form-header-icon">
+          <i class="bi bi-calendar-plus-fill"></i>
+        </div>
+
+        <div>
+          <h2>Appointment Information</h2>
+          <p>Please provide the details for your appointment</p>
+        </div>
+
+      </div>
+
+
+      <!-- Form Fields -->
+
+      <div class="form-grid">
+
+
+        <!-- Doctor -->
+
+        <div class="form-group">
+
+          <label for="doctor">
+            Select Doctor
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-person-badge-fill"></i>
+
+            <select
+              id="doctor"
+              name="doctor"
+              required
+              [(ngModel)]="appointment.doctor">
+
+              <option value="">
+                Select a doctor
+              </option>
+              @for (doctor of doctors; track doctor.id) {
+              <option [ngValue]="doctor">
+                Dr. {{doctor.firstName}} {{doctor.lastName}} - {{doctor.specialization}}
+              </option>
+              }
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- Appointment Date -->
+
+        <div class="form-group">
+
+          <label for="appointmentDate">
+            Appointment Date
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-calendar3"></i>
+
+            <input
+              type="date"
+              id="appointmentDate"
+              name="appointmentDate"
+              required
+              [(ngModel)]="appointment.appointmentDate">
+
+          </div>
+
+        </div>
+
+
+        <!-- Appointment Time -->
+
+        <div class="form-group">
+
+          <label for="appointmentTime">
+            Appointment Time
+            <span>*</span>
+          </label>
+
+          <div class="input-wrapper">
+
+            <i class="bi bi-clock-fill"></i>
+
+            <input
+              type="time"
+              id="appointmentTime"
+              name="appointmentTime"
+              required
+              [(ngModel)]="appointment.appointmentTime">
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- Reason -->
+
+      <div class="form-group reason-group">
+
+        <label for="reason">
+          Reason for Visit
+          <span>*</span>
+        </label>
+
+        <div class="textarea-wrapper">
+
+          <i class="bi bi-chat-left-text-fill"></i>
+
+          <textarea
+            id="reason"
+            name="reason"
+            rows="5"
+            placeholder="Describe the reason for your appointment..."
+            required
+            [(ngModel)]="appointment.reason"></textarea>
+
+        </div>
+
+      </div>
+
+
+      <!-- Information Note -->
+
+      <div class="booking-note">
+
+        <i class="bi bi-info-circle-fill"></i>
+
+        <div>
+          <strong>Appointment Information</strong>
+
+          <span>
+            Please select a suitable date and time. Your appointment
+            will be confirmed after successful booking.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Form Actions -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="cancel-btn" routerLink="../">
+
+        <i class="bi bi-x-lg"></i>
+        Cancel
+
+      </button>
+
+
+      <button
+        type="submit"
+        class="book-btn"
+        (click)="bookAppointment()"
+        >
+
+        <i class="bi bi-calendar-check-fill"></i>
+        Book Appointment
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

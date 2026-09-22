@@ -1,0 +1,361 @@
+<div class="patients-page">
+
+  <!-- Page Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>Patients</h1>
+
+      <p>
+        Patients assigned to you through appointments
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Patient Statistics -->
+
+  <div class="patient-stats">
+
+    <div class="stat-card">
+
+      <div class="stat-icon">
+        <i class="bi bi-people-fill"></i>
+      </div>
+
+      <div>
+
+        <span>Total Patients</span>
+
+        <h2>
+          {{ patients.length }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon male-icon">
+        <i class="bi bi-gender-male"></i>
+      </div>
+
+      <div>
+
+        <span>Male Patients</span>
+
+        <h2>
+          {{ malePatients }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon female-icon">
+        <i class="bi bi-gender-female"></i>
+      </div>
+
+      <div>
+
+        <span>Female Patients</span>
+
+        <h2>
+          {{ femalePatients }}
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-icon blood-icon">
+        <i class="bi bi-droplet-fill"></i>
+      </div>
+
+      <div>
+
+        <span>Registered Today</span>
+
+        <h2>
+          {{ registeredToday }}
+        </h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Patient Table -->
+
+  <div class="patients-card">
+
+    <!-- Table Header -->
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>My Patients</h2>
+
+        <p>
+          Patients who have appointments with you
+        </p>
+
+      </div>
+
+
+      <div class="table-actions">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <i class="bi bi-search"></i>
+
+          <input
+            type="text"
+            placeholder="Search patient..."
+            [(ngModel)]="searchText"
+            (input)="searchPatientByName()"
+          />
+
+        </div>
+
+
+        <!-- Sorting -->
+
+        <button
+          class="filter-btn"
+          type="button"
+          (click)="filterPatientsByNames()">
+
+          <i class="bi bi-sort-alpha-down"></i>
+
+          <span>A → Z</span>
+
+        </button>
+
+
+        <button
+          class="filter-btn"
+          type="button"
+          (click)="filterPatientsByNames()">
+
+          <i class="bi bi-sort-alpha-up"></i>
+
+          <span>Z → A</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Table -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Patient</th>
+
+            <th>Gender</th>
+
+            <th>Date of Birth</th>
+
+            <th>Blood Group</th>
+
+            <th>Phone</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (
+            patient of sortedPatients | paginate: {
+              itemsPerPage: 5,
+              currentPage: p
+            };
+            track patient.id
+          ) {
+
+            <tr>
+
+              <!-- Patient -->
+
+              <td>
+
+                <div class="patient-info">
+
+                  <div class="patient-avatar">
+
+                    {{ patient.firstName.charAt(0) }}
+                    {{ patient.lastName.charAt(0) }}
+
+                  </div>
+
+
+                  <div>
+
+                    <strong>
+                      {{ patient.firstName }} {{ patient.lastName }}
+                    </strong>
+
+                    <span>
+                      #PT-{{ patient.id }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <!-- Gender -->
+
+              <td>
+
+                <span
+                  class="gender"
+                  [class.male]="patient.gender === 'Male'"
+                  [class.female]="patient.gender === 'Female'">
+
+                  {{ patient.gender }}
+
+                </span>
+
+              </td>
+
+
+              <!-- Date of Birth -->
+
+              <td>
+
+                {{ patient.dateOfBirth }}
+
+              </td>
+
+
+              <!-- Blood Group -->
+
+              <td>
+
+                <span class="blood-group">
+
+                  {{ patient.bloodGroup }}
+
+                </span>
+
+              </td>
+
+
+              <!-- Phone -->
+
+              <td>
+
+                +91 {{ patient.phoneNumber }}
+
+              </td>
+
+
+              <!-- Action -->
+
+              <td>
+
+                <div class="action-buttons">
+
+                  <button
+                    type="button"
+                    class="action-btn view-btn"
+                    title="View Patient"
+                    [routerLink]="[
+                      '/dashboard/doctor/view-patient',
+                      patient.id
+                    ]">
+
+                    <i class="bi bi-eye-fill"></i>
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (sortedPatients.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="6"
+                class="empty-state">
+
+                <i class="bi bi-person-x"></i>
+
+                <span>
+                  No patients found.
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- Pagination -->
+
+    @if (sortedPatients.length > 0) {
+
+      <div class="pagination">
+
+        <span>
+          Showing {{ sortedPatients.length }} patients
+        </span>
+
+        <pagination-controls
+          (pageChange)="p = $event">
+        </pagination-controls>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
