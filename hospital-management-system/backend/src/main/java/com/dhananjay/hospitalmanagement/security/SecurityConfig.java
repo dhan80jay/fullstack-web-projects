@@ -39,23 +39,28 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
 		http.csrf(customizer -> customizer.disable());
+		http.cors(Customizer.withDefaults());
 		http.authenticationProvider(authenticationProvider());
 
  		http.authorizeHttpRequests(
  				auth -> 
- 	auth
-	.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-	.requestMatchers("/login").permitAll()
+ 				auth
+ 			    .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+ 				.requestMatchers("/api/auth/**").permitAll()
  				.requestMatchers("/admin/register").permitAll()
  				.requestMatchers("/api/v1/patients/register").permitAll()
  				.requestMatchers("/api/v1/doctors/register").permitAll()
  				.requestMatchers("/admin/**").hasRole("ADMIN")
- 				.requestMatchers("/api/v1/patients/**").hasAnyRole("PATIENT","ADMIN","DOCTOR")
- 				.requestMatchers("/api/v1/doctors/**").hasAnyRole("DOCTOR","ADMIN")
+ 				.requestMatchers("/api/v1/bills/my").hasRole("PATIENT")
+ 				.requestMatchers("/api/v1/patients/**").hasAnyRole("DOCTOR","ADMIN","PATIENT")
+ 				.requestMatchers("/api/v1/doctors").hasAnyRole("PATIENT","DOCTOR","ADMIN")
+  				.requestMatchers("/api/v1/doctors/**").hasAnyRole("DOCTOR","ADMIN")
  				.requestMatchers("/api/v1/medicines/**").hasAnyRole("DOCTOR","ADMIN")
  				.requestMatchers("/api/v1/prescriptions/**").hasAnyRole("DOCTOR","ADMIN","PATIENT")
- 				.requestMatchers("/api/v1/bills/**").hasAnyRole("DOCTOR","ADMIN","PATIENT")
-  				);
+ 			    .requestMatchers("/api/v1/bills").hasRole("ADMIN")
+ 			    .requestMatchers("/api/v1/bills/**").hasRole("ADMIN")
+ 				.requestMatchers("/api/v1/appointments/**").hasAnyRole("PATIENT","ADMIN","DOCTOR")
+   				);
 //		http.formLogin(Customizer.withDefaults());
 //		http.httpBasic(Customizer.withDefaults());
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
