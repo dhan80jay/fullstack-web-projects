@@ -7,7 +7,7 @@ import { AppointmentEntity } from '../../model/appointment/appointment';
   providedIn: 'root',
 })
 export class BillService {
-  url = 'http://localhost:8080/api/v1/bills';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/bills';
 
   constructor(private httpClient: HttpClient) {}
 

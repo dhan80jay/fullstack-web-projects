@@ -7,7 +7,7 @@ import { DoctorEntity } from '../../model/doctor/doctor';
   providedIn: 'root',
 })
 export class DoctorService {
-  url = 'http://localhost:8080/api/v1/doctors';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/doctors';
 
   constructor(private httpClient: HttpClient) {}
 

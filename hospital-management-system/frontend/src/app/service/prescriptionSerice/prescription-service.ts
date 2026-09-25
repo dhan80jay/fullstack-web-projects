@@ -7,7 +7,7 @@ import { MedicineEntity } from '../../model/medicine/medicine';
   providedIn: 'root',
 })
 export class PrescriptionService {
-  url = 'http://localhost:8080/api/v1/prescriptions';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/prescriptions';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class PrescriptionService {
 
   getPrescriptionsByDoctorId(id: any) {
     return this.httpClient.get<PrescriptionEntity[]>(
-      `http://localhost:8080/api/v1/prescriptions/doctor/${id}`,
+      `https://hospital-backend-production-a45c.up.railway.app/api/v1/prescriptions/doctor/${id}`,
     );
   }
 

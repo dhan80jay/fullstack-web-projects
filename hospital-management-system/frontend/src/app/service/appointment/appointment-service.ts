@@ -8,7 +8,7 @@ import { BookAppointmentDto } from '../../model/appointment/book-appointment-dto
   providedIn: 'root',
 })
 export class AppointmentService {
-  url = 'http://localhost:8080/api/v1/appointments';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/appointments';
 
   constructor(private httClient: HttpClient) {}
 

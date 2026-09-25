@@ -6,7 +6,7 @@ import { ResetPassword } from '../../model/reset-password';
   providedIn: 'root',
 })
 export class LoginService {
-  url = 'http://localhost:8080/api/auth';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/auth';
 
   constructor(private httpClient: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { HealthInfo } from '../../model/patient/health-info';
   providedIn: 'root',
 })
 export class PatientService {
-  url = 'http://localhost:8080/api/v1/patients';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/patients';
 
   constructor(private httpClient: HttpClient) {}
 

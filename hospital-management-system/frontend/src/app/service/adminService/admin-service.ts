@@ -7,7 +7,7 @@ import { PatientEntity } from '../../model/patient/patient-entity';
 })
 export class AdminService {
     
-  url = 'http://localhost:8080/api/v1/admin/patients';
+  url = 'https://hospital-backend-production-a45c.up.railway.app/api/v1/admin/patients';
  
   constructor(private httpClient:HttpClient) {
     
