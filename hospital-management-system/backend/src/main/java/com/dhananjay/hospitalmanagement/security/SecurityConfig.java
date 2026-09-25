@@ -1,5 +1,5 @@
 package com.dhananjay.hospitalmanagement.security;
-
+import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +43,9 @@ public class SecurityConfig {
 
  		http.authorizeHttpRequests(
  				auth -> 
- 				auth.requestMatchers("/login").permitAll()
+ 	auth
+	.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+	.requestMatchers("/login").permitAll()
  				.requestMatchers("/admin/register").permitAll()
  				.requestMatchers("/api/v1/patients/register").permitAll()
  				.requestMatchers("/api/v1/doctors/register").permitAll()
