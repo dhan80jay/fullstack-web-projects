@@ -1,7 +1,8 @@
 package com.dhananjay.hospitalmanagement.service;
- import java.util.List;
+ import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -57,10 +58,32 @@ public class PrescriptionService {
 		}
 	}
 	
+	public Prescription getPrescriptionByAppointmentId(Long appointmentId) {
+
+	    Prescription prescription =
+	            prescriptionRepository.findByAppointment_Id(appointmentId);
+
+	    if (prescription == null) {
+	        throw new NoSuchElementException(
+	            "Prescription not found for appointment " + appointmentId
+	        );
+	    }
+
+	    return prescription;
+	}
+	
 	//Get All Prescription
 	public List<Prescription> getAllPrescription (){
 		return prescriptionRepository.findAll();
 	}
+	
+	public List<Prescription> getPrescriptionsByDoctorUsername(String username) {
+
+	    return prescriptionRepository
+	            .findByAppointment_Doctor_User_Username(username);
+	}
+	
+	
 	
 	//Get Prescription by Id
 	public Prescription getPrescriptionById(Long id) {
@@ -72,32 +95,58 @@ public class PrescriptionService {
 		}
  	}
 	
+	public List<Medicine> getMedicinesByPrescriptionId(Long prescriptionId) {
+	    getPrescriptionById(prescriptionId);
+	    return medicineRepository.findByPrescription_Id(prescriptionId);
+	}
+	
 	//Update Prescription 
-	public Prescription updatePrescription (Prescription updatedPrescription,Long id) {
-		Prescription prescription = getPrescriptionById(id);
- 			
-		
-			if(updatedPrescription.getAppointment() == null || updatedPrescription.getAppointment().getId() == null) {
-				throw new NoSuchElementException("Appointment not found with id: "+id);
-			}
-			Long apId = updatedPrescription.getAppointment().getId();
-			Appointment appointment = appointmentService.findAppointmentById(apId);
+	public Prescription updatePrescription(Prescription updatedPrescription, Long id) {
 
-			prescription.setAppointment(appointment);
-			prescription.setDiagnosis(updatedPrescription.getDiagnosis());
-			
-			if(updatedPrescription.getMedicine() != null) {
-				prescription.getMedicine().clear();
-				
-				for(Medicine medicine: updatedPrescription.getMedicine()) {
-					medicine.setPrescription(prescription);
-					prescription.getMedicine().add(medicine);
-				}
-			}
-   			prescription.setNotes(updatedPrescription.getNotes());
-			prescription.setPrescriptionDate(updatedPrescription.getPrescriptionDate());
-   			return prescriptionRepository.save(prescription);
-   	}
+	    Prescription prescription = getPrescriptionById(id);
+
+	    if (updatedPrescription.getAppointment() == null
+	            || updatedPrescription.getAppointment().getId() == null) {
+	        throw new NoSuchElementException("Appointment ID is required.");
+	    }
+
+	    Long appointmentId = updatedPrescription.getAppointment().getId();
+
+	    Appointment appointment = appointmentService.findAppointmentById(appointmentId);
+
+	    prescription.setAppointment(appointment);
+	    prescription.setDiagnosis(updatedPrescription.getDiagnosis());
+	    prescription.setNotes(updatedPrescription.getNotes());
+	    prescription.setPrescriptionDate(updatedPrescription.getPrescriptionDate());
+
+	    if (updatedPrescription.getMedicine() != null) {
+
+	        prescription.getMedicine().clear();
+
+	        for (Medicine medicine : updatedPrescription.getMedicine()) {
+	            medicine.setPrescription(prescription);
+	            prescription.getMedicine().add(medicine);
+	        }
+	    }
+
+	    return prescriptionRepository.save(prescription);
+	}
+	
+	public Map<String, Object> getPrescriptionForUpdate(Long id) {
+
+	    Prescription prescription = getPrescriptionById(id);
+
+	    Map<String, Object> response = new HashMap<>();
+
+	    response.put("id", prescription.getId());
+	    response.put("diagnosis", prescription.getDiagnosis());
+	    response.put("notes", prescription.getNotes());
+	    response.put("prescriptionDate", prescription.getPrescriptionDate());
+	    response.put("appointment", prescription.getAppointment());
+	    response.put("medicine", prescription.getMedicine());
+
+	    return response;
+	}
 	
 	//Delete Prescription
 	@Transactional

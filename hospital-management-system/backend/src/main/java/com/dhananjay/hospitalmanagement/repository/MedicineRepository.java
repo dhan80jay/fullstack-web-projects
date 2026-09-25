@@ -1,5 +1,7 @@
 package com.dhananjay.hospitalmanagement.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +17,7 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long>{
     @Transactional
     @Query("DELETE FROM Medicine m WHERE m.prescription.id = :prescriptionId")
 	void deleteByPrescriptionId(@Param("prescriptionId") Long prescriptionId);
+    
+    List<Medicine> findByPrescription_Id(Long prescriptionId);
+
 }

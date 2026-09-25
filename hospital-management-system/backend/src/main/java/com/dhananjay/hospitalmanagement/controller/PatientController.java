@@ -1,5 +1,5 @@
 package com.dhananjay.hospitalmanagement.controller;
-
+import org.springframework.security.core.Authentication;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +45,7 @@ public class PatientController {
 
 	@PostMapping("/register")
 	public ResponseEntity<Patient> addPatient (@RequestBody Patient patient) {
+	     System.out.println("Inside addPatient");
 		 patientService.addPatient(patient);
 		 return new ResponseEntity<Patient>(patient,HttpStatus.CREATED);
 	}
@@ -53,6 +54,13 @@ public class PatientController {
 	public ResponseEntity<List<Patient>> addMultiplePatient (@RequestBody List<Patient> patients){
 		List<Patient> addedPatients = patientService.addMultiplePatient(patients);
 		return ResponseEntity.ok(addedPatients);
+	}
+	
+	@GetMapping("/me")
+	public ResponseEntity<Patient> getLoggedInPatient(Authentication authentication){
+		String userName = authentication.getName();
+		Patient patient = patientService.getPatientByUsername(userName); 
+		return ResponseEntity.ok(patient); 
 	}
 	
 	@GetMapping
@@ -74,10 +82,23 @@ public class PatientController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updatePatient (@RequestBody Patient patient,@PathVariable Long id){
-		patientService.updatePatient(patient, id);
-		return ResponseEntity.ok("Patient Updated Successfully !");
+	public ResponseEntity<Patient> updatePatient (@RequestBody Patient patient,@PathVariable Long id){
+		Patient updatedPatient = patientService.updatePatient(patient, id);
+		return new ResponseEntity<Patient>(updatedPatient,HttpStatus.OK);
 	}
+	
+	@PutMapping("/health-information/{id}")
+	public ResponseEntity<Patient> updateHealthInformation(
+	        @PathVariable Long id,
+	        @RequestBody Patient patient) {
+
+	    Patient updatedPatient =
+	            patientService.updatePatientProfile(patient, id);
+
+	    return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
+	}
+	
+	
 	
 	//Create Appointment
 	@PostMapping("/appointments")

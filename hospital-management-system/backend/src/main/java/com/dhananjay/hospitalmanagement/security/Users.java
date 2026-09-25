@@ -52,7 +52,8 @@ public class Users implements UserDetails{
     @JsonIgnore
     private Doctor doctor;
 
-    public Users() {}
+    public Users() {
+    }
     
     public Users(Long id, String username, String password, String email, Role role
 			) {
@@ -110,11 +111,10 @@ public class Users implements UserDetails{
 				+ role + "]";
 	}
 
-
+	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+ 		return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
 	}
 
   

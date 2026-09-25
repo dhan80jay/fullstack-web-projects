@@ -3,6 +3,7 @@ package com.dhananjay.hospitalmanagement.repository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,4 +19,8 @@ public interface AppoinmentRepository extends JpaRepository<Appointment, Long>{
 	
 	List<Appointment> findByDoctorId(Long doctorId);
 	Appointment findByIdAndDoctorId(Long appointmentId,Long doctorId);
+    List<Appointment> findAppointmentsByPatientId(Long patientId);
+    
+   Appointment findAppointmentByPrescriptionId(Long prescriptionId);
+    
 }

@@ -6,4 +6,5 @@ import com.dhananjay.hospitalmanagement.model.Patient;
 
 public interface PatientRepository extends JpaRepository<Patient, Long>{
 
+	public Patient findByUser_Username(String username);
 }

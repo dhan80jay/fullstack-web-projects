@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
+import com.dhananjay.hospitalmanagement.enums.AppointmentStatus;
 import com.dhananjay.hospitalmanagement.exceptions.AppointmentInPastException;
 import com.dhananjay.hospitalmanagement.exceptions.DoctorNotAvailableException;
 import com.dhananjay.hospitalmanagement.model.Appointment;
@@ -60,6 +61,46 @@ public class AppointmentService {
         }
 	}
 	
+	//create appointment by patient
+	//Create appointment
+	public Appointment createAppointmentByPatient (Appointment appointment,Long patientId) {
+		
+		Long doctorId = appointment.getDoctor().getId();
+ 	    Doctor doctor = doctorService.findById(doctorId);
+ 	    
+ 	    Patient patient = patientService.findPatientById(patientId);
+        
+	    LocalTime time = appointment.getAppointmentTime();
+        LocalDate localDate = appointment.getAppointmentDate();
+
+        boolean isAvailable =  appointmentRepository.existsByDoctorIdAndAppointmentDateAndAppointmentTime(doctorId,localDate,time);
+
+        if(localDate.isAfter(LocalDate.now()) || localDate.equals(LocalDate.now()) && time.isAfter(LocalTime.now())) {
+      	    //boolean isAvailable =  doctorAvailability (appointment);
+            if(isAvailable) {
+    	    	throw new DoctorNotAvailableException("Doctor is not available at this time slot.");
+     	    }else {
+    	        appointment.setDoctor(doctor);
+    	 	    appointment.setPatient(patient);
+    	 	    appointment.setAppointmentStatus(AppointmentStatus.BOOKED);
+    	    	return appointmentRepository.save(appointment);
+    	    }
+        }else {
+        	throw new AppointmentInPastException("Appointment date and time cannot be in the past.");
+        }
+	}
+
+	
+	
+	//find appointment by prescription Id
+	public Appointment findAppointmentByPrescriptionId(Long prescriptionId) {
+	    Appointment appointment =  appointmentRepository.findAppointmentByPrescriptionId(prescriptionId);
+	    if(appointment == null) {
+	    	throw new NoSuchElementException("Appointment Not Found");
+	    }
+	    return appointment;
+	}
+	
 	//Create Multiple appointment
 	@Transactional
 	public List<Appointment> createMultipleAppointment (List<Appointment> appointments) {
@@ -95,6 +136,15 @@ public class AppointmentService {
  			return appointment;
 	}
 	
+	//find appointment by patient id
+	public List <Appointment> findAppointmentsByPatientId(Long id) {
+		List<Appointment> appointment = appointmentRepository.findAppointmentsByPatientId(id);
+		if(appointment == null)
+			throw new NoSuchElementException("Appointment not found with id: "+id);
+ 			return   appointment;
+
+	}
+	
 	//Delete appointment 
 	public void deleteAppointment (Long id) {
 		Appointment appointment = findAppointmentById(id);
@@ -106,15 +156,26 @@ public class AppointmentService {
 	public Appointment updateAppointment(Appointment updatedAppointment,Long id) {
 		
 		Appointment appointment = findAppointmentById(id);
+		if(appointment.getAppointmentStatus() != AppointmentStatus.COMPLETED) {
 		appointment.setAppointmentDate(updatedAppointment.getAppointmentDate());
 		appointment.setAppointmentTime(updatedAppointment.getAppointmentTime());
 		appointment.setAppointmentStatus(updatedAppointment.getAppointmentStatus());
-		appointment.setAppointmentDate(updatedAppointment.getAppointmentDate());
-		appointment.setDoctor(updatedAppointment.getDoctor());
-		appointment.setPatient(updatedAppointment.getPatient());
-		appointment.setPrescription(updatedAppointment.getPrescription());
-		appointment.setBill(updatedAppointment.getBill());
+		appointment.setReason(updatedAppointment.getReason());
+		}
+		else {
+			throw new AppointmentInPastException("Appointment is completed");
+		}
+//		appointment.setDoctor(updatedAppointment.getDoctor());
+//		appointment.setPatient(updatedAppointment.getPatient());
+//		appointment.setPrescription(updatedAppointment.getPrescription());
+//		appointment.setBill(updatedAppointment.getBill());
 
+		return appointmentRepository.save(appointment);
+	}
+
+	public Appointment updateAppointmentStatus(Long appointmentId) {
+		Appointment appointment = findAppointmentById(appointmentId);
+		appointment.setAppointmentStatus(AppointmentStatus.CANCELLED);
 		return appointmentRepository.save(appointment);
 	}
 	

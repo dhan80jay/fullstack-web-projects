@@ -20,7 +20,6 @@ import com.dhananjay.hospitalmanagement.service.AppointmentService;
 
 @RestController
 @RequestMapping("/api/v1/appointments")
-@CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentController {
 
 	AppointmentService appointmentService;
@@ -36,16 +35,46 @@ public class AppointmentController {
 		return new ResponseEntity<List<Appointment>>(appointments,HttpStatus.OK);
 	}
 	
+	@GetMapping("/patient/{id}")
+	public ResponseEntity<List<Appointment>> getAppointmentByPatientId (@PathVariable Long id) {
+		  List<Appointment> appointment = appointmentService.findAppointmentsByPatientId(id);
+		  return new ResponseEntity<List<Appointment>>(appointment,HttpStatus.OK);
+	}
+
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Appointment> getAppointmentById (@PathVariable Long id) {
 		  Appointment appointment = appointmentService.findAppointmentById(id);
 		  return new ResponseEntity<Appointment>(appointment,HttpStatus.OK);
 	}
 	
+	@GetMapping("/prescription/{prescriptionId}")
+	public ResponseEntity<Appointment> getAppointmentByPrescriptionId(
+	        @PathVariable Long prescriptionId) {
+
+	    Appointment appointment =
+	            appointmentService.findAppointmentByPrescriptionId(prescriptionId);
+
+	    return new ResponseEntity<>(appointment, HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
 		  Appointment createdAppointment = appointmentService.createAppointment(appointment);
 		  return new ResponseEntity<Appointment>(createdAppointment,HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/patient/{patientId}")
+	public ResponseEntity<Appointment> createAppointmentByPatient(@RequestBody Appointment appointment,@PathVariable Long patientId) {
+		  Appointment createdAppointment = appointmentService.createAppointmentByPatient(appointment,patientId);
+		  return new ResponseEntity<Appointment>(createdAppointment,HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/patient/{appointmentId}")
+	public ResponseEntity<Appointment> updateAppointmentStatus(@PathVariable Long appointmentId){
+		Appointment appointment = appointmentService.updateAppointmentStatus(appointmentId);
+		return new ResponseEntity<Appointment>(appointment,HttpStatus.OK);
+		
 	}
 	
 	@PostMapping ("/bulk")
@@ -57,8 +86,8 @@ public class AppointmentController {
 	
 	@PutMapping ("/{id}")
 	public ResponseEntity<Appointment> updateAppointment (@RequestBody Appointment appointment,@PathVariable Long id){
-		  Appointment updatedPatient =  appointmentService.updateAppointment(appointment, id);
-		  return new ResponseEntity<>(updatedPatient,HttpStatus.OK);
+		  Appointment updateAppointment =  appointmentService.updateAppointment(appointment, id);
+		  return new ResponseEntity<>(updateAppointment,HttpStatus.OK);
  	}
 	
 	@DeleteMapping("/{id}")

@@ -57,7 +57,7 @@ public class AdminController {
 	    return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 	}
 	
-	//View Users
+	//View Users	
 	@GetMapping("/users")
 	public List<Users> getAllUsers(){
 		return userService.getAllUsers();

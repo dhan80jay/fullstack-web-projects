@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +19,9 @@ import com.dhananjay.hospitalmanagement.enums.AppointmentStatus;
 import com.dhananjay.hospitalmanagement.model.Appointment;
 import com.dhananjay.hospitalmanagement.model.Doctor;
 import com.dhananjay.hospitalmanagement.model.Prescription;
-import com.dhananjay.hospitalmanagement.security.Users;
 import com.dhananjay.hospitalmanagement.service.AppointmentService;
 import com.dhananjay.hospitalmanagement.service.DoctorService;
 import com.dhananjay.hospitalmanagement.service.PrescriptionService;
-import com.dhananjay.hospitalmanagement.service.UsersService;
 
 @RestController
 @RequestMapping("/api/v1/doctors")
@@ -67,7 +66,7 @@ public class DoctorController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteDoctor(@PathVariable Long id){
 		doctorService.deleteDoctor(id);
-		return ResponseEntity.ok("Doctor deleted Successfully !");
+		return ResponseEntity.ok("Doctor deleted Successfully !");	
 	}
 	
 	@PutMapping("/{id}")
@@ -76,7 +75,7 @@ public class DoctorController {
 		return ResponseEntity.ok(updatedDoctor);
 	}
 	
-	@GetMapping("/appointments/{id}")
+	@GetMapping("/appointments/{id}")	
 	public ResponseEntity <List<Appointment>> getAppointmentByDoctorId (@PathVariable Long id){
 		List<Appointment> appointments= doctorService.getAppointmentByDoctorId(id);
 		return new ResponseEntity<List<Appointment>>(appointments,HttpStatus.OK);
@@ -92,6 +91,17 @@ public class DoctorController {
 	public ResponseEntity<Appointment> updateAppointmentStatus (@PathVariable Long appointmentId,@PathVariable Long doctorId,@RequestParam AppointmentStatus status){
 		Appointment appointment = doctorService.updateAppointmentStatus(doctorId, appointmentId, status);
 		return new ResponseEntity<Appointment>(appointment,HttpStatus.OK);
+	}
+	
+	@GetMapping("/me")
+	public ResponseEntity<Doctor> getLoggedInDoctor(
+	        Authentication authentication) {
+
+	    String username = authentication.getName();
+
+	    Doctor doctor = doctorService.getDoctorByUsername(username);
+
+	    return ResponseEntity.ok(doctor);
 	}
 	 
  }

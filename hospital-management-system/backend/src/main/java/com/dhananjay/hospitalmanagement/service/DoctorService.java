@@ -3,7 +3,9 @@ package com.dhananjay.hospitalmanagement.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.dhananjay.hospitalmanagement.enums.AppointmentStatus;
 import com.dhananjay.hospitalmanagement.exceptions.AppointmentNotFoundException;
@@ -27,10 +29,21 @@ public class DoctorService {
 
 	//Add Doctor
 	public Doctor addDoctor (Doctor doctor) {
-		userService.registerDoctor(doctor.getUser());
+		Users user = userService.registerDoctor(doctor.getUser());
+		doctor.setUser(user);
+		doctor.getUser().setEmail(doctor.getEmail());
 		return doctorRepository.save(doctor);
  	}
 	
+	public Doctor getDoctorByUsername(String username) {
+
+	    return doctorRepository.findByUser_Username(username)
+	            .orElseThrow(() ->
+	                new NoSuchElementException(
+	                    "Doctor not found for username " + username
+	                )
+	            );
+	}
 	//Add multiple doctor at once
 	public List<Doctor> addMultipleDoctor(List<Doctor> doctor){
 		return doctorRepository.saveAll(doctor);
@@ -54,7 +67,16 @@ public class DoctorService {
 	//Delete Doctor
 	public void deleteDoctor (Long id) {
 		Doctor doctor  = findById(id);
-		doctorRepository.delete(doctor);
+		
+		if(doctor.getAppointments().isEmpty()) {
+			doctorRepository.delete(doctor);
+		}
+		else {
+			throw new ResponseStatusException(
+				    HttpStatus.CONFLICT,
+				    "Cannot delete doctor because appointments exist"
+				);
+		}
 	}
 	
 	//Update Doctor
@@ -67,9 +89,11 @@ public class DoctorService {
 		doctor.setPhoneNumber(updatedDoctor.getPhoneNumber());
 		doctor.setQualification(updatedDoctor.getQualification());
 		doctor.setExperienceYears(updatedDoctor.getExperienceYears());
-		doctor.setAppointments(updatedDoctor.getAppointments());
+		Users user = updatedDoctor.getUser();
+		Users updatedUser = userService.updateDoctorUser(user,user.getId());
+		doctor.setUser(updatedUser);
 		
-		return doctor;
+		return doctorRepository.save(doctor);
  	}
 	
 	//GetAppointments By Doctor Id

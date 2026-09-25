@@ -35,8 +35,12 @@ public class Prescription {
     private Appointment appointment;
 
     @JsonProperty(access = Access.WRITE_ONLY)
-    @OneToMany(mappedBy="prescription",cascade = CascadeType.REMOVE)
-    private List<Medicine> medicine=new ArrayList<Medicine>();
+    @OneToMany(
+        mappedBy = "prescription",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Medicine> medicine = new ArrayList<Medicine>();
     
     public Prescription() {}
     

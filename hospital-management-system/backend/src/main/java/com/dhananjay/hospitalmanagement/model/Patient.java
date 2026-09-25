@@ -1,4 +1,4 @@
-package com.dhananjay.hospitalmanagement.model;
+	package com.dhananjay.hospitalmanagement.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

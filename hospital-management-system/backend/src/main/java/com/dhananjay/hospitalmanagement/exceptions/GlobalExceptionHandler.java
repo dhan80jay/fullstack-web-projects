@@ -51,5 +51,11 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<String> (userExist.getMessage(),HttpStatus.CONFLICT);
 	}
 	
+	@ExceptionHandler(BillAlreadyExistsException.class)
+	public ResponseEntity<String> billAlreadyExistException(BillAlreadyExistsException billArAlreadyExists){
+		return new ResponseEntity<String> (billArAlreadyExists.getMessage(),HttpStatus.CONFLICT);
+ 
+	}
+	
 	//
  }

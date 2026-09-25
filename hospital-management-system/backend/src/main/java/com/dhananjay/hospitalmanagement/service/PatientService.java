@@ -3,6 +3,8 @@ package com.dhananjay.hospitalmanagement.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dhananjay.hospitalmanagement.exceptions.PrescriptionExistException;
@@ -18,16 +20,20 @@ public class PatientService {
 	PatientRepository patientRepository;
 	PrescriptionRepository prescriptionRepository;
 	UsersService userService;
+	PasswordEncoder passwordEncoder;
 	
 	public PatientService(PatientRepository patientRepository,PrescriptionRepository prescriptionRepository
-			,UsersService userService) {
+			,UsersService userService,PasswordEncoder passwordEncoder) {
  		this.patientRepository = patientRepository;
  		this.prescriptionRepository = prescriptionRepository;
  		this.userService = userService;
+ 		this.passwordEncoder = passwordEncoder;
 	}
 	
 	//Add patient
 	public Patient addPatient(Patient patient) {
+		System.out.println("Inside addpatient patientService");
+		patient.getUser().setEmail(patient.getEmail());
  		userService.registerPatient(patient.getUser());
  		return patientRepository.save(patient);
 	}
@@ -40,6 +46,15 @@ public class PatientService {
  	//Get all patients
 	public  List<Patient> getAllPatients (){
  		return patientRepository.findAll();
+	}
+	
+	//Find patient by username
+	public Patient getPatientByUsername(String userName) {
+		 Patient patient = patientRepository.findByUser_Username(userName);
+		 if(patient == null) {
+			 throw new NoSuchElementException("Patient Not found !");
+		 }
+		 return patient;
 	}
 	
 	//Find patient by id
@@ -56,6 +71,22 @@ public class PatientService {
 		patientRepository.delete(patient);
 	}
 	
+	//Update patient profile
+	public Patient updatePatientProfile(Patient updatedPatient, Long id) {
+
+	    Patient patient = patientRepository.findById(id)
+	            .orElseThrow(() ->
+	                new NoSuchElementException("Patient not found with id " + id)
+	            );
+
+	    patient.setBloodGroup(updatedPatient.getBloodGroup());
+	    patient.setGender(updatedPatient.getGender());
+	    patient.setDateOfBirth(updatedPatient.getDateOfBirth());
+	    patient.setPhoneNumber(updatedPatient.getPhoneNumber());
+
+	    return patientRepository.save(patient);
+	}
+	
 	//Update patient 
 	public Patient updatePatient (Patient updatedPatient,Long id) {
 		
@@ -69,7 +100,11 @@ public class PatientService {
 		 patient.setAppointments(updatedPatient.getAppointments());
 		 patient.setDateOfBirth(updatedPatient.getDateOfBirth());
 		 patient.setPhoneNumber(updatedPatient.getPhoneNumber());
+		 Users user = updatedPatient.getUser();
+		 Users user1 = userService.updatePatientUser(user,user.getId());
+		 user.setEmail(user.getEmail());
 		 
+		 patient.setUser(user1);
 		 return patientRepository.save(patient);
 	}
 	

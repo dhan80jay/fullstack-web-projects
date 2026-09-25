@@ -1,12 +1,15 @@
 package com.dhananjay.hospitalmanagement.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
 import com.dhananjay.hospitalmanagement.enums.AppointmentStatus;
 import com.dhananjay.hospitalmanagement.exceptions.AppointmentNotCompletedException;
+import com.dhananjay.hospitalmanagement.exceptions.BillAlreadyExistsException;
 import com.dhananjay.hospitalmanagement.exceptions.BillNotFoundException;
 import com.dhananjay.hospitalmanagement.model.Appointment;
 import com.dhananjay.hospitalmanagement.model.Bill;
@@ -19,11 +22,18 @@ public class BillService {
 	BillRepository billRepository;
  	AppointmentService appointmentService;
  
- 	public BillService(BillRepository billRepository, AppointmentService appointmentService) {
-		super();
-		this.billRepository = billRepository;
-		this.appointmentService = appointmentService;
-	}
+ 	PatientService patientService;
+ 	
+ 	public BillService(
+ 	        BillRepository billRepository,
+ 	        AppointmentService appointmentService,
+ 	        PatientService patientService) {
+
+ 	    super();
+ 	    this.billRepository = billRepository;
+ 	    this.appointmentService = appointmentService;
+ 	    this.patientService = patientService;
+ 	}
 
 	//Create Bill
  	public Bill createBill(Bill bill){
@@ -31,24 +41,53 @@ public class BillService {
  		Appointment originalAppointment = appointmentService.findAppointmentById(appointmentId);
  	 	bill.setAppointment(originalAppointment);
  	 	
+ 	 	if (billRepository.existsByAppointmentId(appointmentId)) {
+ 	 	    throw new BillAlreadyExistsException(
+ 	 	        "Bill already exists for this appointment"
+ 	 	    );
+ 	 	}
  		if(originalAppointment.getAppointmentStatus() == AppointmentStatus.COMPLETED) {
  	 		double totalAmount = bill.getConsultationFee()+bill.getMedicineCharges()+bill.getOtherCharges();
  	 		bill.setTotalAmount(totalAmount);
 
  	 		billRepository.save(bill);
- 		}else {
+ 		}
+ 		else {
  			throw new AppointmentNotCompletedException("Appointment not completed yet cannot create bill");
  		}
   		
  		return bill;
  	}
  	
+ 	public List<Bill> getBillsByPatient(String username) {
+ 	    return billRepository.findByAppointment_Patient_User_Username(username);
+ 	}
  	
  	//Get all bills
  	public List<Bill> getAllBills (){
  		 return billRepository.findAll();
  	}
  	
+ 	public Map<Long, Appointment> getAppointmentsForBills() {
+
+ 	    List<Bill> bills = billRepository.findAll();
+
+ 	    Map<Long, Appointment> billAppointments = new HashMap<>();
+
+ 	    for (Bill bill : bills) {
+
+ 	        if (bill.getAppointment() != null) {
+
+ 	            billAppointments.put(
+ 	                bill.getId(),
+ 	                bill.getAppointment()
+ 	            );
+
+ 	        }
+ 	    }
+
+ 	    return billAppointments;
+ 	}
  	//Get bill by id
  	public Bill getBillById(Long id){
  		Bill bill = billRepository.findById(id).orElse(null);

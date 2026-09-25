@@ -46,21 +46,21 @@ public class Appointment {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonProperty(access = Access.WRITE_ONLY)
+    //@JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn (name = "doctor_id")
     private Doctor doctor;
    
-    @JsonProperty(access = Access.WRITE_ONLY)
+   // @JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn (name = "patient_id")
     private Patient patient;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(mappedBy = "appointment",cascade = CascadeType.ALL)
     private Prescription prescription;
     
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(mappedBy = "appointment",cascade = CascadeType.REMOVE)
     private Bill bill;
     
