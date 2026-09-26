@@ -7,50 +7,57 @@
 }
 
 .view-patient-page {
-  min-height: calc(100vh - 82px);
-  padding: 30px 35px;
+  min-height: calc(100vh - 62px);
+  padding: 22px 26px;
   background: #f5f7fb;
 }
 
 
-/* Header */
+/* =========================
+   Header
+========================= */
 
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 .page-header h1 {
   margin: 0;
   color: #172b4d;
-  font-size: 25px;
+  font-size: 21px;
+  font-weight: 600;
 }
 
 .page-header p {
-  margin-top: 6px;
+  margin-top: 5px;
   color: #8b95a5;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 
-/* Back Button */
+/* =========================
+   Back Button
+========================= */
 
 .back-btn {
+  height: 34px;
+
   border: 1px solid #d9e7f8;
   background: white;
   color: #1565c0;
 
-  padding: 10px 15px;
+  padding: 0 12px;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
 
   cursor: pointer;
@@ -63,34 +70,36 @@
 }
 
 
-/* Profile */
+/* =========================
+   Profile
+========================= */
 
 .profile-card {
   background: white;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 
   overflow: hidden;
 }
 
 .profile-header {
-  padding: 25px;
+  padding: 18px 20px;
 
   display: flex;
   align-items: center;
 
-  gap: 15px;
+  gap: 12px;
 
   border-bottom: 1px solid #eef0f4;
 }
 
 .profile-avatar {
-  width: 65px;
-  height: 65px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -102,7 +111,7 @@
 
   color: #1565c0;
 
-  font-size: 20px;
+  font-size: 16px;
 
   font-weight: 700;
 }
@@ -112,30 +121,33 @@
 
   color: #172b4d;
 
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .profile-name span {
   display: block;
 
-  margin-top: 6px;
+  margin-top: 4px;
 
   color: #98a2b3;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 
-/* Information */
+/* =========================
+   Information
+========================= */
 
 .profile-info-grid {
-  padding: 25px;
+  padding: 18px 20px;
 
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
 
-  gap: 22px;
+  gap: 16px;
 }
 
 .info-item {
@@ -145,11 +157,11 @@
 .info-label {
   display: block;
 
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 
   color: #8b95a5;
 
-  font-size: 10px;
+  font-size: 9px;
 
   text-transform: uppercase;
 }
@@ -159,7 +171,7 @@
 
   color: #344054;
 
-  font-size: 12px;
+  font-size: 11px;
 
   font-weight: 500;
 
@@ -167,20 +179,22 @@
 }
 
 
-/* Section Card */
+/* =========================
+   Section Card
+========================= */
 
 .section-card {
   background: white;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   overflow: hidden;
 }
 
 .section-header {
-  padding: 22px 25px;
+  padding: 16px 20px;
 
   display: flex;
 
@@ -196,43 +210,46 @@
 
   color: #172b4d;
 
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .section-header p {
-  margin-top: 5px;
+  margin-top: 4px;
 
   color: #8b95a5;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .appointment-count {
-  min-width: 36px;
-  height: 32px;
+  min-width: 32px;
+  height: 28px;
 
-  padding: 0 10px;
+  padding: 0 8px;
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  gap: 6px;
+  gap: 5px;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   background: #e8f1ff;
 
   color: #1565c0;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 600;
 }
 
 
-/* Table */
+/* =========================
+   Table
+========================= */
 
 .table-wrapper {
   width: 100%;
@@ -243,7 +260,7 @@
 table {
   width: 100%;
 
-  min-width: 750px;
+  min-width: 700px;
 
   border-collapse: collapse;
 }
@@ -253,13 +270,13 @@ thead {
 }
 
 th {
-  padding: 13px 25px;
+  padding: 11px 20px;
 
   text-align: left;
 
   color: #8b95a5;
 
-  font-size: 9px;
+  font-size: 8px;
 
   text-transform: uppercase;
 
@@ -267,13 +284,13 @@ th {
 }
 
 td {
-  padding: 15px 25px;
+  padding: 12px 20px;
 
   border-top: 1px solid #eef0f4;
 
   color: #667085;
 
-  font-size: 10px;
+  font-size: 9px;
 
   white-space: nowrap;
 }
@@ -283,16 +300,18 @@ tbody tr:hover {
 }
 
 
-/* Status */
+/* =========================
+   Status
+========================= */
 
 .status {
   display: inline-flex;
 
-  padding: 5px 9px;
+  padding: 4px 8px;
 
   border-radius: 20px;
 
-  font-size: 9px;
+  font-size: 8px;
 
   font-weight: 600;
 }
@@ -322,30 +341,34 @@ tbody tr:hover {
 }
 
 
-/* View Button */
+/* =========================
+   View Button
+========================= */
 
 .view-btn {
-  height: 30px;
+  height: 28px;
 
-  padding: 0 11px;
+  padding: 0 9px;
 
   display: inline-flex;
 
   align-items: center;
 
-  gap: 6px;
+  gap: 5px;
 
   border: 1px solid #d9e7f8;
 
-  border-radius: 6px;
+  border-radius: 5px;
 
   background: white;
 
   color: #1565c0;
 
-  font-size: 10px;
+  font-size: 9px;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
 .view-btn:hover {
@@ -353,10 +376,12 @@ tbody tr:hover {
 }
 
 
-/* Empty */
+/* =========================
+   Empty Table State
+========================= */
 
 .empty-state {
-  height: 120px;
+  height: 100px;
 
   text-align: center;
 
@@ -366,19 +391,24 @@ tbody tr:hover {
 .empty-state i {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
-  font-size: 20px;
+  font-size: 18px;
 }
+
+
+/* =========================
+   Empty Patient
+========================= */
 
 .empty-patient {
   background: white;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  padding: 60px 20px;
+  padding: 45px 20px;
 
   display: flex;
 
@@ -390,11 +420,11 @@ tbody tr:hover {
 }
 
 .empty-patient > i {
-  font-size: 40px;
+  font-size: 34px;
 
   color: #98a2b3;
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .empty-patient h2 {
@@ -402,28 +432,30 @@ tbody tr:hover {
 
   color: #172b4d;
 
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .empty-patient p {
   color: #8b95a5;
 
-  font-size: 11px;
+  font-size: 10px;
 
-  margin: 7px 0 20px;
+  margin: 6px 0 16px;
 }
 
 
-/* Loading */
+/* =========================
+   Loading
+========================= */
 
 .loading-card {
-  min-height: 250px;
+  min-height: 210px;
 
   background: white;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   display: flex;
 
@@ -433,21 +465,23 @@ tbody tr:hover {
 
   justify-content: center;
 
-  gap: 10px;
+  gap: 8px;
 
   color: #8b95a5;
 
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .loading-card i {
-  font-size: 25px;
+  font-size: 22px;
 
   color: #1565c0;
 }
 
 
-/* Responsive */
+/* =========================
+   Responsive
+========================= */
 
 @media (max-width: 1000px) {
 
@@ -460,7 +494,7 @@ tbody tr:hover {
 @media (max-width: 700px) {
 
   .view-patient-page {
-    padding: 20px;
+    padding: 18px;
   }
 
   .page-header {
@@ -468,7 +502,7 @@ tbody tr:hover {
 
     flex-direction: column;
 
-    gap: 15px;
+    gap: 12px;
   }
 
   .profile-info-grid {

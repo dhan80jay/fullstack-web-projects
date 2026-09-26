@@ -429,3 +429,12 @@
   background: white;
 }
 
+
+/* =========================
+   APPLICATION DISPLAY SCALE
+========================= */
+
+.dashboard {
+  zoom: 0.67;
+  min-height: 149.25vh;
+}

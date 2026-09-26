@@ -1,3 +1,7 @@
+/* =========================================
+   MAIN PAGE
+   ========================================= */
+
 * {
   box-sizing: border-box;
 }
@@ -7,51 +11,71 @@
 }
 
 .appointment-view-page {
-  min-height: calc(100vh - 82px);
-  padding: 30px 35px;
+  min-height: calc(100vh - 62px);
+
+  padding: 22px 26px;
+
   background: #f5f7fb;
 }
 
 
-/* =========================
+/* =========================================
    PAGE HEADER
-========================= */
+   ========================================= */
 
 .page-header {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
-  margin-bottom: 22px;
+
+  margin-bottom: 18px;
 }
 
 .page-header h1 {
   margin: 0;
+
   color: #172b4d;
-  font-size: 25px;
+
+  font-size: 21px;
+
+  font-weight: 600;
 }
 
 .page-header p {
-  margin-top: 6px;
+  margin-top: 4px;
+
   color: #8b95a5;
-  font-size: 12px;
+
+  font-size: 10px;
 }
 
+
+/* =========================================
+   BACK BUTTON
+   ========================================= */
+
 .back-btn {
-  height: 38px;
+  height: 34px;
 
   display: flex;
-  align-items: center;
-  gap: 8px;
 
-  padding: 0 14px;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 12px;
 
   border: 1px solid #dfe3e8;
+
   border-radius: 7px;
 
   background: white;
+
   color: #667085;
 
-  font-size: 11px;
+  font-size: 10px;
 
   cursor: pointer;
 
@@ -60,26 +84,29 @@
 
 .back-btn:hover {
   background: #f8fafc;
+
   border-color: #cbd5e1;
 }
 
 
-/* =========================
+/* =========================================
    APPOINTMENT SUMMARY
-========================= */
+   ========================================= */
 
 .appointment-summary {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
-  padding: 22px 25px;
+  padding: 17px 20px;
 
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 
   border: 1px solid #e9edf3;
-  border-radius: 12px;
+
+  border-radius: 10px;
 
   background: white;
 }
@@ -89,33 +116,39 @@
 
   align-items: center;
 
-  gap: 15px;
+  gap: 12px;
 }
 
 .appointment-icon {
-  width: 55px;
-  height: 55px;
+  width: 46px;
+
+  height: 46px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  border-radius: 10px;
+  flex-shrink: 0;
+
+  border-radius: 9px;
 
   background: #e8f1ff;
 
   color: #1565c0;
 
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .summary-left h2 {
-  margin: 0 0 7px;
+  margin: 0 0 5px;
 
   color: #172b4d;
 
-  font-size: 17px;
+  font-size: 15px;
+
+  font-weight: 600;
 }
 
 .summary-left span {
@@ -123,13 +156,13 @@
 
   align-items: center;
 
-  gap: 5px;
+  gap: 4px;
 
-  margin-right: 15px;
+  margin-right: 12px;
 
   color: #8b95a5;
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .summary-left span i {
@@ -141,63 +174,65 @@
 
   align-items: center;
 
-  gap: 15px;
+  gap: 12px;
 }
 
 
-/* =========================
+/* =========================================
    TWO COLUMN
-========================= */
+   ========================================= */
 
 .two-column {
   display: grid;
 
   grid-template-columns: repeat(2, 1fr);
 
-  gap: 20px;
+  gap: 16px;
 }
 
 
-/* =========================
+/* =========================================
    DETAILS CARD
-========================= */
+   ========================================= */
 
 .details-card {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   overflow: hidden;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: white;
 }
 
 
-/* =========================
+/* =========================================
    CARD HEADER
-========================= */
+   ========================================= */
 
 .card-header {
   display: flex;
 
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
-  padding: 19px 24px;
+  padding: 15px 20px;
 
   border-bottom: 1px solid #eef0f4;
 }
 
 .header-icon {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+
+  height: 34px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 8px;
@@ -206,7 +241,7 @@
 
   color: #1565c0;
 
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .prescription-icon {
@@ -226,40 +261,46 @@
 
   color: #172b4d;
 
-  font-size: 14px;
+  font-size: 13px;
+
+  font-weight: 600;
 }
 
 .card-header p {
-  margin-top: 4px;
+  margin-top: 3px;
 
   color: #8b95a5;
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 
-/* =========================
+/* =========================================
    PERSON DETAILS
-========================= */
+   ========================================= */
 
 .person-details {
   display: flex;
 
   align-items: center;
 
-  gap: 13px;
+  gap: 11px;
 
-  padding: 20px 24px;
+  padding: 16px 20px;
 }
 
 .person-avatar {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+
+  height: 42px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
+
+  flex-shrink: 0;
 
   border-radius: 50%;
 
@@ -267,7 +308,7 @@
 
   color: #1565c0;
 
-  font-size: 13px;
+  font-size: 11px;
 
   font-weight: 600;
 }
@@ -283,32 +324,34 @@
 
   color: #344054;
 
-  font-size: 13px;
+  font-size: 11px;
+
+  font-weight: 600;
 }
 
 .person-details span {
   display: block;
 
-  margin-top: 5px;
+  margin-top: 4px;
 
   color: #98a2b3;
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 
-/* =========================
+/* =========================================
    MINI DETAILS
-========================= */
+   ========================================= */
 
 .mini-details {
   display: grid;
 
   grid-template-columns: repeat(2, 1fr);
 
-  gap: 20px;
+  gap: 16px;
 
-  padding: 17px 24px;
+  padding: 14px 20px;
 
   border-top: 1px solid #eef0f4;
 }
@@ -316,11 +359,11 @@
 .mini-details span {
   display: block;
 
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 
   color: #98a2b3;
 
-  font-size: 8px;
+  font-size: 7px;
 
   text-transform: uppercase;
 
@@ -330,24 +373,24 @@
 .mini-details strong {
   color: #344054;
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 500;
 }
 
 
-/* =========================
+/* =========================================
    DETAILS GRID
-========================= */
+   ========================================= */
 
 .details-grid {
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
 
-  gap: 22px;
+  gap: 18px;
 
-  padding: 23px 25px;
+  padding: 18px 20px;
 }
 
 .detail-item {
@@ -355,7 +398,7 @@
 
   flex-direction: column;
 
-  gap: 7px;
+  gap: 5px;
 }
 
 .full-width {
@@ -365,7 +408,7 @@
 .detail-label {
   color: #98a2b3;
 
-  font-size: 8px;
+  font-size: 7px;
 
   text-transform: uppercase;
 
@@ -375,30 +418,30 @@
 .detail-item strong {
   color: #344054;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 500;
 }
 
 
-/* =========================
+/* =========================================
    STATUS
-========================= */
+   ========================================= */
 
 .status {
   display: inline-flex;
 
   align-items: center;
 
-  gap: 5px;
+  gap: 4px;
 
   width: fit-content;
 
-  padding: 5px 9px;
+  padding: 4px 8px;
 
   border-radius: 20px;
 
-  font-size: 8px;
+  font-size: 7px;
 
   font-weight: 600;
 }
@@ -434,20 +477,20 @@
 }
 
 
-/* =========================
+/* =========================================
    PRESCRIPTION
-========================= */
+   ========================================= */
 
 .prescription-content {
-  padding: 23px 25px;
+  padding: 18px 20px;
 }
 
 .prescription-info {
   display: flex;
 
-  gap: 60px;
+  gap: 40px;
 
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .prescription-info div {
@@ -455,21 +498,21 @@
 
   flex-direction: column;
 
-  gap: 6px;
+  gap: 5px;
 }
 
 .prescription-info strong {
   color: #344054;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 500;
 }
 
 .diagnosis-box {
-  padding: 16px;
+  padding: 13px;
 
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 
   border-radius: 8px;
 
@@ -479,11 +522,11 @@
 }
 
 .diagnosis-box h3 {
-  margin: 6px 0;
+  margin: 5px 0;
 
   color: #344054;
 
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .diagnosis-box p {
@@ -491,18 +534,18 @@
 
   color: #667085;
 
-  font-size: 10px;
+  font-size: 9px;
 
   line-height: 1.5;
 }
 
 
-/* =========================
+/* =========================================
    MEDICINES
-========================= */
+   ========================================= */
 
 .medicine-heading {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .medicine-heading h3 {
@@ -510,11 +553,11 @@
 
   color: #344054;
 
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .medicine-heading i {
-  margin-right: 6px;
+  margin-right: 5px;
 
   color: #16875d;
 }
@@ -536,25 +579,27 @@ thead {
 }
 
 th {
-  padding: 11px 14px;
+  padding: 9px 12px;
 
   color: #8b95a5;
 
   text-align: left;
 
-  font-size: 8px;
+  font-size: 7px;
+
+  font-weight: 600;
 
   text-transform: uppercase;
 }
 
 td {
-  padding: 13px 14px;
+  padding: 11px 12px;
 
   border-top: 1px solid #eef0f4;
 
   color: #667085;
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 td strong {
@@ -568,22 +613,22 @@ td strong {
 
   color: #98a2b3;
 
-  padding: 25px;
+  padding: 20px;
 }
 
 
-/* =========================
+/* =========================================
    PRESCRIPTION NOTES
-========================= */
+   ========================================= */
 
 .prescription-notes {
   display: flex;
 
-  gap: 10px;
+  gap: 8px;
 
-  margin-top: 20px;
+  margin-top: 16px;
 
-  padding: 14px;
+  padding: 12px;
 
   border-radius: 8px;
 
@@ -595,48 +640,48 @@ td strong {
 .prescription-notes > i {
   color: #c47c00;
 
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .prescription-notes span {
   color: #667085;
 
-  font-size: 9px;
+  font-size: 8px;
 
   font-weight: 600;
 }
 
 .prescription-notes p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
 
   color: #8b95a5;
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 
-/* =========================
+/* =========================================
    PRESCRIPTION BUTTON
-========================= */
+   ========================================= */
 
 .prescription-action {
   display: flex;
 
   justify-content: flex-end;
 
-  margin-top: 18px;
+  margin-top: 15px;
 }
 
 .view-prescription-btn {
-  height: 34px;
+  height: 32px;
 
   display: inline-flex;
 
   align-items: center;
 
-  gap: 7px;
+  gap: 6px;
 
-  padding: 0 13px;
+  padding: 0 11px;
 
   border: 1px solid #d9e7f8;
 
@@ -646,7 +691,7 @@ td strong {
 
   color: #1565c0;
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 600;
 
@@ -658,12 +703,12 @@ td strong {
 }
 
 
-/* =========================
+/* =========================================
    BILLING
-========================= */
+   ========================================= */
 
 .billing-content {
-  padding: 22px 25px;
+  padding: 18px 20px;
 }
 
 .billing-row {
@@ -671,19 +716,19 @@ td strong {
 
   justify-content: space-between;
 
-  padding: 11px 0;
+  padding: 9px 0;
 }
 
 .billing-row span {
   color: #667085;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .billing-row strong {
   color: #344054;
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 500;
 }
@@ -691,7 +736,7 @@ td strong {
 .billing-divider {
   height: 1px;
 
-  margin: 8px 0;
+  margin: 6px 0;
 
   background: #e9edf3;
 }
@@ -701,13 +746,13 @@ td strong {
 
   justify-content: space-between;
 
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 .billing-total span {
   color: #344054;
 
-  font-size: 12px;
+  font-size: 11px;
 
   font-weight: 600;
 }
@@ -715,7 +760,7 @@ td strong {
 .billing-total strong {
   color: #1565c0;
 
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .payment-status {
@@ -725,9 +770,9 @@ td strong {
 
   justify-content: space-between;
 
-  margin-top: 12px;
+  margin-top: 10px;
 
-  padding-top: 15px;
+  padding-top: 12px;
 
   border-top: 1px solid #eef0f4;
 }
@@ -735,16 +780,16 @@ td strong {
 .payment-status > span:first-child {
   color: #667085;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 
-/* =========================
+/* =========================================
    NO DATA
-========================= */
+   ========================================= */
 
 .no-data {
-  min-height: 120px;
+  min-height: 100px;
 
   display: flex;
 
@@ -754,7 +799,7 @@ td strong {
 
   justify-content: center;
 
-  padding: 20px;
+  padding: 18px;
 
   color: #98a2b3;
 
@@ -762,24 +807,24 @@ td strong {
 }
 
 .no-data i {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .no-data p {
   margin: 0;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 
-/* =========================
+/* =========================================
    LOADING
-========================= */
+   ========================================= */
 
 .loading-card {
-  min-height: 250px;
+  min-height: 220px;
 
   display: flex;
 
@@ -789,32 +834,32 @@ td strong {
 
   justify-content: center;
 
-  gap: 10px;
+  gap: 8px;
 
   background: white;
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   color: #8b95a5;
 
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .loading-card i {
   color: #1565c0;
 
-  font-size: 25px;
+  font-size: 22px;
 }
 
 
-/* =========================
+/* =========================================
    NOT FOUND
-========================= */
+   ========================================= */
 
 .not-found-card {
-  padding: 60px 20px;
+  padding: 45px 20px;
 
   display: flex;
 
@@ -828,15 +873,15 @@ td strong {
 
   border: 1px solid #e9edf3;
 
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .not-found-card > i {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 
   color: #98a2b3;
 
-  font-size: 40px;
+  font-size: 34px;
 }
 
 .not-found-card h2 {
@@ -844,26 +889,26 @@ td strong {
 
   color: #172b4d;
 
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .not-found-card p {
-  margin: 7px 0 20px;
+  margin: 6px 0 16px;
 
   color: #8b95a5;
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
 
-/* =========================
+/* =========================================
    RESPONSIVE
-========================= */
+   ========================================= */
 
 @media (max-width: 900px) {
 
   .appointment-view-page {
-    padding: 20px;
+    padding: 18px;
   }
 
   .two-column {
@@ -884,7 +929,7 @@ td strong {
 
     flex-direction: column;
 
-    gap: 15px;
+    gap: 12px;
   }
 
   .appointment-summary {
@@ -892,7 +937,7 @@ td strong {
 
     flex-direction: column;
 
-    gap: 18px;
+    gap: 15px;
   }
 
   .summary-right {
@@ -912,7 +957,7 @@ td strong {
   .prescription-info {
     flex-direction: column;
 
-    gap: 15px;
+    gap: 12px;
   }
 
 }

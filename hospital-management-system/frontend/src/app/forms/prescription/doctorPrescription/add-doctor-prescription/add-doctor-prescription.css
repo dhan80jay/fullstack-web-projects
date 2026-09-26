@@ -1,49 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+}
+
 .create-prescription-page {
-  padding: 25px;
+  min-height: calc(100vh - 62px);
+  padding: 22px 26px;
   max-width: 1400px;
   margin: 0 auto;
+  background: #f5f7fb;
 }
 
 
-/* Page Header */
+/* =========================
+   PAGE HEADER
+========================= */
 
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 700;
   color: #1f2937;
 }
 
 .page-header p {
-  margin: 6px 0 0;
-  font-size: 13px;
+  margin: 5px 0 0;
+  font-size: 10px;
   color: #6b7280;
 }
 
 
-/* Back Button */
+/* =========================
+   BACK BUTTON
+========================= */
 
 .back-btn {
-  height: 40px;
-  padding: 0 16px;
+  height: 34px;
+
+  padding: 0 12px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+
   border: 1px solid #d1d5db;
-  border-radius: 7px;
+  border-radius: 6px;
+
   background: #ffffff;
   color: #374151;
-  font-size: 12px;
+
+  font-size: 10px;
   font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
@@ -53,32 +74,43 @@
 }
 
 
-/* Loading */
+/* =========================
+   LOADING
+========================= */
 
 .loading-card {
-  min-height: 300px;
+  min-height: 210px;
+
   background: #ffffff;
+
   border: 1px solid #e5e7eb;
   border-radius: 10px;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
-  gap: 15px;
+
+  gap: 10px;
 }
 
 .loading-card p {
   margin: 0;
-  font-size: 13px;
+
+  font-size: 10px;
   color: #6b7280;
 }
 
 .spinner {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
+
   border: 3px solid #e5e7eb;
   border-top-color: #1565c0;
+
   border-radius: 50%;
+
   animation: spin 0.8s linear infinite;
 }
 
@@ -89,82 +121,110 @@
 }
 
 
-/* Form Card */
+/* =========================
+   FORM CARD
+========================= */
 
 .form-card {
   background: #ffffff;
+
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  margin-bottom: 20px;
+
+  margin-bottom: 16px;
+
   overflow: hidden;
 }
 
 
-/* Card Header */
+/* =========================
+   CARD HEADER
+========================= */
 
 .card-header {
-  min-height: 75px;
-  padding: 16px 20px;
+  min-height: 62px;
+
+  padding: 13px 18px;
+
   display: flex;
   align-items: center;
-  gap: 13px;
+
+  gap: 10px;
+
   border-bottom: 1px solid #e5e7eb;
+
   background: #fafafa;
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+
+  border-radius: 7px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: #e8f1fb;
   color: #1565c0;
-  font-size: 18px;
+
+  font-size: 15px;
+
   flex-shrink: 0;
 }
 
 .card-header h2 {
   margin: 0;
-  font-size: 15px;
+
+  font-size: 13px;
   font-weight: 700;
+
   color: #1f2937;
 }
 
 .card-header p {
-  margin: 4px 0 0;
-  font-size: 11px;
+  margin: 3px 0 0;
+
+  font-size: 9px;
   color: #6b7280;
 }
 
 
-/* Form Body */
+/* =========================
+   FORM BODY
+========================= */
 
 .form-body {
-  padding: 22px;
+  padding: 18px;
 }
 
 .form-row {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+
+  gap: 16px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+
+  gap: 5px;
 }
 
 .form-group.full-width {
   width: 100%;
-  margin-top: 18px;
+
+  margin-top: 14px;
 }
 
 .form-group label {
-  font-size: 12px;
+  font-size: 10px;
+
   font-weight: 600;
+
   color: #374151;
 }
 
@@ -176,114 +236,163 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
+
   box-sizing: border-box;
+
   border: 1px solid #d1d5db;
-  border-radius: 7px;
-  padding: 10px 12px;
+
+  border-radius: 6px;
+
+  padding: 8px 10px;
+
   background: #ffffff;
+
   color: #1f2937;
+
   font-family: inherit;
-  font-size: 12px;
+
+  font-size: 10px;
+
   outline: none;
+
   transition: 0.2s ease;
 }
 
 .form-group input,
 .form-group select {
-  height: 40px;
+  height: 36px;
 }
 
 .form-group textarea {
   resize: vertical;
-  min-height: 90px;
+
+  min-height: 75px;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: #1565c0;
+
   box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
 }
 
 .form-group input[readonly] {
   background: #f9fafb;
+
   color: #6b7280;
+
   cursor: not-allowed;
 }
 
 
-/* Appointment Details */
+/* =========================
+   APPOINTMENT DETAILS
+========================= */
 
 .appointment-details {
-  margin-top: 20px;
-  padding: 18px;
+  margin-top: 16px;
+
+  padding: 14px;
+
   border: 1px solid #dbeafe;
-  border-radius: 8px;
+
+  border-radius: 7px;
+
   background: #f8fbff;
+
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+
+  gap: 14px;
 }
 
 .detail-item {
   display: flex;
+
   flex-direction: column;
-  gap: 5px;
+
+  gap: 4px;
 }
 
 .detail-label {
-  font-size: 10px;
+  font-size: 8px;
+
   font-weight: 600;
+
   color: #6b7280;
+
   text-transform: uppercase;
 }
 
 .detail-item strong {
-  font-size: 12px;
+  font-size: 10px;
+
   color: #1f2937;
 }
 
 .status-badge {
   width: fit-content;
-  padding: 5px 9px;
+
+  padding: 4px 8px;
+
   border-radius: 20px;
+
   background: #dcfce7;
+
   color: #15803d;
-  font-size: 10px;
+
+  font-size: 8px;
+
   font-weight: 700;
 }
 
 
-/* Empty Appointments */
+/* =========================
+   EMPTY APPOINTMENTS
+========================= */
 
 .empty-appointments {
-  margin-top: 18px;
-  padding: 30px 20px;
+  margin-top: 14px;
+
+  padding: 24px 18px;
+
   border: 1px dashed #d1d5db;
-  border-radius: 8px;
+
+  border-radius: 7px;
+
   text-align: center;
+
   background: #fafafa;
 }
 
 .empty-appointments i {
-  font-size: 32px;
+  font-size: 28px;
+
   color: #9ca3af;
 }
 
 .empty-appointments h3 {
-  margin: 10px 0 5px;
-  font-size: 14px;
+  margin: 8px 0 4px;
+
+  font-size: 12px;
+
   color: #374151;
 }
 
 .empty-appointments p {
   margin: 0;
-  font-size: 11px;
+
+  font-size: 9px;
+
   color: #6b7280;
 }
 
 
-/* Medicine Header */
+/* =========================
+   MEDICINE HEADER
+========================= */
 
 .medicine-header {
   justify-content: space-between;
@@ -291,180 +400,274 @@
 
 .header-content {
   display: flex;
+
   align-items: center;
-  gap: 13px;
+
+  gap: 10px;
 }
 
 .add-medicine-btn {
-  height: 36px;
-  padding: 0 13px;
+  height: 32px;
+
+  padding: 0 11px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  gap: 7px;
+
+  gap: 6px;
+
   border: 1px solid #1565c0;
+
   border-radius: 6px;
+
   background: #1565c0;
+
   color: #ffffff;
-  font-size: 11px;
+
+  font-size: 9px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
 .add-medicine-btn:hover {
   background: #0d5bb5;
+
   border-color: #0d5bb5;
 }
 
 
-/* Medicine Body */
+/* =========================
+   MEDICINE BODY
+========================= */
 
 .medicine-body {
   display: flex;
+
   flex-direction: column;
-  gap: 16px;
+
+  gap: 12px;
 }
 
 
-/* Medicine Card */
+/* =========================
+   MEDICINE CARD
+========================= */
 
 .medicine-card {
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
+
+  border-radius: 7px;
+
   overflow: hidden;
+
   background: #ffffff;
 }
 
 .medicine-title {
-  min-height: 52px;
-  padding: 10px 15px;
+  min-height: 46px;
+
+  padding: 8px 12px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   background: #f9fafb;
+
   border-bottom: 1px solid #e5e7eb;
 }
 
 .medicine-number {
   display: block;
-  font-size: 12px;
+
+  font-size: 10px;
+
   font-weight: 700;
+
   color: #1f2937;
 }
 
 .medicine-subtitle {
   display: block;
+
   margin-top: 2px;
-  font-size: 10px;
+
+  font-size: 8px;
+
   color: #9ca3af;
 }
 
 .remove-medicine-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   border: 1px solid #fecaca;
-  border-radius: 6px;
+
+  border-radius: 5px;
+
   background: #fff5f5;
+
   color: #dc2626;
+
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
 .remove-medicine-btn:hover {
   background: #fee2e2;
+
   border-color: #fca5a5;
 }
 
+
+/* =========================
+   MEDICINE FIELDS
+========================= */
+
 .medicine-fields {
-  padding: 18px;
+  padding: 15px;
+
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+
+  gap: 14px;
 }
 
 .medicine-fields .full-width {
   grid-column: 1 / -1;
+
   margin-top: 0;
 }
 
 
-/* No Medicine */
+/* =========================
+   NO MEDICINE
+========================= */
 
 .no-medicine {
-  padding: 40px 20px;
+  padding: 32px 18px;
+
   text-align: center;
+
   border: 1px dashed #d1d5db;
-  border-radius: 8px;
+
+  border-radius: 7px;
+
   background: #fafafa;
 }
 
 .no-medicine i {
-  font-size: 35px;
+  font-size: 30px;
+
   color: #9ca3af;
 }
 
 .no-medicine h3 {
-  margin: 10px 0 5px;
-  font-size: 14px;
+  margin: 8px 0 4px;
+
+  font-size: 12px;
+
   color: #374151;
 }
 
 .no-medicine p {
-  margin: 0 0 15px;
-  font-size: 11px;
+  margin: 0 0 12px;
+
+  font-size: 9px;
+
   color: #6b7280;
 }
 
 .add-first-medicine-btn {
-  height: 36px;
-  padding: 0 14px;
+  height: 32px;
+
+  padding: 0 12px;
+
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
-  gap: 7px;
+
+  gap: 6px;
+
   border: 1px solid #1565c0;
+
   border-radius: 6px;
+
   background: #1565c0;
+
   color: #ffffff;
-  font-size: 11px;
+
+  font-size: 9px;
+
   font-weight: 600;
+
   cursor: pointer;
 }
 
 
-/* Form Actions */
+/* =========================
+   FORM ACTIONS
+========================= */
 
 .form-actions {
   display: flex;
+
   align-items: center;
+
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 5px;
-  padding-bottom: 20px;
+
+  gap: 8px;
+
+  margin-top: 4px;
+
+  padding-bottom: 16px;
 }
 
 .cancel-btn,
 .submit-btn {
-  height: 40px;
-  padding: 0 17px;
+  height: 34px;
+
+  padding: 0 14px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border-radius: 7px;
-  font-size: 11px;
+
+  gap: 6px;
+
+  border-radius: 6px;
+
+  font-size: 9px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
 .cancel-btn {
   border: 1px solid #d1d5db;
+
   background: #ffffff;
+
   color: #374151;
 }
 
@@ -474,34 +677,46 @@
 
 .submit-btn {
   border: 1px solid #1565c0;
+
   background: #1565c0;
+
   color: #ffffff;
 }
 
 .submit-btn:hover:not(:disabled) {
   background: #0d5bb5;
+
   border-color: #0d5bb5;
 }
 
 .submit-btn:disabled {
   opacity: 0.6;
+
   cursor: not-allowed;
 }
 
 
-/* Button Spinner */
+/* =========================
+   BUTTON SPINNER
+========================= */
 
 .button-spinner {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
+
   border: 2px solid rgba(255, 255, 255, 0.4);
+
   border-top-color: #ffffff;
+
   border-radius: 50%;
+
   animation: spin 0.7s linear infinite;
 }
 
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 900px) {
 
@@ -528,8 +743,10 @@
 
   .page-header {
     align-items: flex-start;
+
     flex-direction: column;
-    gap: 15px;
+
+    gap: 12px;
   }
 
   .back-btn {
@@ -546,8 +763,10 @@
 
   .medicine-header {
     align-items: flex-start;
+
     flex-direction: column;
-    gap: 15px;
+
+    gap: 12px;
   }
 
   .add-medicine-btn {
@@ -564,15 +783,15 @@
   }
 
   .page-header h1 {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .form-body {
-    padding: 15px;
+    padding: 14px;
   }
 
   .card-header {
-    padding: 14px 15px;
+    padding: 12px 14px;
   }
 
   .form-actions {

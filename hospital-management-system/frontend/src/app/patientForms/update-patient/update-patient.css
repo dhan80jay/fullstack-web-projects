@@ -1,3 +1,7 @@
+/* =========================================
+   GLOBAL
+   ========================================= */
+
 * {
   box-sizing: border-box;
 }
@@ -7,46 +11,60 @@
 }
 
 
-/* =========================
+/* =========================================
    PAGE
-========================= */
+   ========================================= */
 
 .health-update-page {
   width: 100%;
-  padding: 4px 0 20px;
+  padding: 2px 0 18px;
 }
 
 
-/* =========================
+/* =========================================
    PAGE HEADER
-========================= */
+   ========================================= */
 
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+
+  margin-bottom: 18px;
 }
 
 .page-header h1 {
   margin: 0;
+
   color: #172b4d;
-  font-size: 24px;
+
+  font-size: 21px;
   font-weight: 600;
 }
 
 .page-header p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
+
   color: #8b95a5;
-  font-size: 12px;
+
+  font-size: 10px;
 }
+
+
+/* =========================================
+   BACK BUTTON
+   ========================================= */
 
 .back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
 
-  padding: 9px 13px;
+  gap: 6px;
+
+  height: 34px;
+
+  padding: 0 12px;
 
   border: 1px solid #dfe3e8;
   border-radius: 7px;
@@ -55,7 +73,7 @@
 
   color: #667085;
 
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
 
   text-decoration: none;
@@ -65,18 +83,20 @@
 
 .back-btn:hover {
   color: #1565c0;
+
   border-color: #1565c0;
+
   background: #f8fbff;
 }
 
 
-/* =========================
+/* =========================================
    FORM CARD
-========================= */
+   ========================================= */
 
 .form-card {
   width: 100%;
-  max-width: 850px;
+  max-width: 800px;
 
   margin: 0 auto;
 
@@ -84,30 +104,30 @@
 
   border: 1px solid #e7ebf0;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   overflow: hidden;
 }
 
 
-/* =========================
+/* =========================================
    FORM HEADER
-========================= */
+   ========================================= */
 
 .form-header {
   display: flex;
   align-items: center;
 
-  gap: 14px;
+  gap: 10px;
 
-  padding: 20px 24px;
+  padding: 17px 20px;
 
   border-bottom: 1px solid #eef0f4;
 }
 
 .form-header-icon {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
@@ -115,13 +135,13 @@
 
   flex-shrink: 0;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   background: #e8f1ff;
 
   color: #1565c0;
 
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .form-header h2 {
@@ -129,44 +149,44 @@
 
   color: #172b4d;
 
-  font-size: 16px;
+  font-size: 15px;
 
   font-weight: 600;
 }
 
 .form-header p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
 
   color: #8b95a5;
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
 
-/* =========================
+/* =========================================
    FORM BODY
-========================= */
+   ========================================= */
 
 .form-body {
-  padding: 24px;
+  padding: 20px;
 }
 
 
-/* =========================
+/* =========================================
    SECTION TITLE
-========================= */
+   ========================================= */
 
 .section-title {
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 
   color: #344054;
 
-  font-size: 13px;
+  font-size: 12px;
 
   font-weight: 600;
 }
@@ -174,20 +194,20 @@
 .section-title i {
   color: #1565c0;
 
-  font-size: 16px;
+  font-size: 14px;
 }
 
 
-/* =========================
+/* =========================================
    FORM GRID
-========================= */
+   ========================================= */
 
 .form-grid {
   display: grid;
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 20px;
+  gap: 16px;
 }
 
 .form-group {
@@ -196,16 +216,16 @@
 }
 
 
-/* =========================
+/* =========================================
    LABEL
-========================= */
+   ========================================= */
 
 .form-group label {
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
   color: #344054;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 600;
 }
@@ -215,19 +235,19 @@
 }
 
 
-/* =========================
+/* =========================================
    INPUT
-========================= */
+   ========================================= */
 
 .input-wrapper {
-  height: 43px;
+  height: 38px;
 
   display: flex;
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 
-  padding: 0 12px;
+  padding: 0 10px;
 
   border: 1px solid #dfe3e8;
 
@@ -241,7 +261,7 @@
 .input-wrapper i {
   color: #98a2b3;
 
-  font-size: 14px;
+  font-size: 13px;
 
   flex-shrink: 0;
 }
@@ -260,7 +280,7 @@
 
   font-family: inherit;
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .input-wrapper input::placeholder {
@@ -270,7 +290,8 @@
 .input-wrapper:focus-within {
   border-color: #1565c0;
 
-  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
+  box-shadow:
+    0 0 0 3px rgba(21, 101, 192, 0.08);
 }
 
 .input-wrapper:focus-within i {
@@ -278,9 +299,9 @@
 }
 
 
-/* =========================
+/* =========================================
    SELECT
-========================= */
+   ========================================= */
 
 .input-wrapper select {
   cursor: pointer;
@@ -293,14 +314,14 @@
 }
 
 
-/* =========================
+/* =========================================
    VALIDATION
-========================= */
+   ========================================= */
 
 .alert.alert-danger {
-  margin-top: 5px;
+  margin-top: 4px;
 
-  padding: 3px 7px;
+  padding: 2px 6px;
 
   background: transparent;
 
@@ -308,15 +329,15 @@
 
   color: #dc3545;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 500;
 }
 
 
-/* =========================
+/* =========================================
    FORM FOOTER
-========================= */
+   ========================================= */
 
 .form-footer {
   display: flex;
@@ -325,24 +346,24 @@
 
   justify-content: flex-end;
 
-  gap: 9px;
+  gap: 8px;
 
-  margin-top: 26px;
+  margin-top: 22px;
 
-  padding-top: 20px;
+  padding-top: 17px;
 
   border-top: 1px solid #eef0f4;
 }
 
 
-/* =========================
+/* =========================================
    BUTTONS
-========================= */
+   ========================================= */
 
 .cancel-btn,
 .reset-btn,
 .save-btn {
-  height: 39px;
+  height: 34px;
 
   display: inline-flex;
 
@@ -350,13 +371,13 @@
 
   justify-content: center;
 
-  gap: 7px;
+  gap: 6px;
 
-  padding: 0 15px;
+  padding: 0 13px;
 
   border-radius: 7px;
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 600;
 
@@ -366,7 +387,9 @@
 }
 
 
-/* Cancel */
+/* =========================================
+   CANCEL
+   ========================================= */
 
 .cancel-btn {
   border: 1px solid #dfe3e8;
@@ -381,7 +404,9 @@
 }
 
 
-/* Reset */
+/* =========================================
+   RESET
+   ========================================= */
 
 .reset-btn {
   border: 1px solid #dfe3e8;
@@ -398,7 +423,9 @@
 }
 
 
-/* Save */
+/* =========================================
+   SAVE
+   ========================================= */
 
 .save-btn {
   border: 1px solid #1565c0;
@@ -421,14 +448,14 @@
 }
 
 
-/* =========================
+/* =========================================
    RESPONSIVE
-========================= */
+   ========================================= */
 
 @media (max-width: 700px) {
 
   .health-update-page {
-    padding: 0 0 20px;
+    padding: 0 0 18px;
   }
 
   .page-header {
@@ -436,23 +463,25 @@
 
     flex-direction: column;
 
-    gap: 13px;
+    gap: 11px;
   }
 
   .page-header h1 {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+
+    gap: 14px;
   }
 
   .form-body {
-    padding: 20px;
+    padding: 18px;
   }
 
   .form-header {
-    padding: 18px 20px;
+    padding: 16px 18px;
   }
 
 }
